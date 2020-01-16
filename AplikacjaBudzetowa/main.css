@@ -1,0 +1,570 @@
+/* Background pattern from subtlepatterns.com */
+body
+{
+	margin: 0;
+	background-color: #2F3336;
+	color: #efefef;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 17px;
+}
+
+h1.logo
+{
+	font-size: 44px;
+	font-weight: 700;/*grubosc czcionki*/
+	color: #1c74b2;
+	text-align: center;
+	text-transform: uppercase; /*zamina litery na duże*/
+	letter-spacing: 5px;/*rozstrzelenie*/
+	margin-top: 25px;
+	margin-bottom: 40px;
+	text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+.categories
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 950px;
+	text-align: center;
+}
+
+.title
+{
+	display: inline-block;/*wyśrodkowanie diva w innym divie*/
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 260px;
+	padding-top: 50px;
+}
+
+a.titlelink
+{
+	color: white;
+	text-decoration: none;/*bez dekoracji*/
+	display: block; /*zachowuje sie jak element blokowy*/
+	width: 230px;
+	height: 142px;
+}
+
+.title1
+{
+	margin: 25px;
+	width: 230px;
+	height: 142px;
+	background-color: #666666;
+	float: left;
+	text-align: center;
+	-webkit-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+}
+
+.title1:hover /*co ma sie stać po najechaniu*/
+{
+	background-color: #555555;
+}
+
+.title2
+{
+	margin: 25px;
+	width: 230px;
+	height: 142px;
+	background-color: #3095d3;
+	float: left;
+	text-align: center;
+	-webkit-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+}
+
+.title2:hover /*co ma sie stać po najechaniu*/
+{
+	background-color: #2084c2;
+}
+
+.info
+{
+	text-align: center;
+	margin: 10px;
+}
+
+/*registration and login*/
+
+p#registration
+{
+	text-align: left;
+	padding-left: 20px;
+}
+ p#login
+ {
+	text-align: left;
+ }
+
+.return a:link
+{
+	color: #efefef;
+    text-shadow: 3px -2px 2px rgba(0,0,0,0.9);
+    font-weight: bold;
+    float: right;
+    padding: 20px 20px 20px 20px;
+	text-decoration: none;
+}
+
+.return a:visited
+{
+	color: #efefef;
+}
+.return a:hover
+{
+	color: white;
+}
+
+input[type=text],/*dla typu text i password*/
+input[type=email],
+input[type=password],
+input[type=number],
+input[type=date]
+{
+	width: 300px;
+	background-color: #efefef;
+	color: #666;/*zapisa skrócony*/
+	border: 2px solid #ddd;
+	border-radius: 5px;/*promien*/
+	font-size: 20px;
+	padding: 10px;
+	box-sizing: border-box;
+	outline: none;/*wyłaczenie obwódki wokól pola*/
+	margin-top: 10px;
+}
+
+input[type=text]:focus,/*jesli pole zyskuje aktywnosc co ma sie stać-focus*/
+input[type=email]:focus,
+input[type=password]:focus,
+input[type=number]:focus,
+input[type=date]:focus
+{
+	-webkit-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
+	-moz-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
+	box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
+	border: 2px solid #1c74b2;
+	background-color: #c9d8ea;
+	color: #1c74b2;
+}
+
+input[type=submit],/*dla przycisku*/
+input[type=reset]
+{
+	width: 300px;
+	background-color: #3095d3;
+	font-size: 20px;
+	color: #efefef;
+	padding: 15px 10px;
+	margin-top: 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;/*kursor zmienia sie na łapkę*/
+	letter-spacing: 2px;/*rozstrzelenie liter*/
+	outline: none;
+	-webkit-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+}
+
+input[type=submit]:hover,
+input[type=reset]:hover
+{
+	background-color: #2084c2;
+}
+
+input::-webkit-input-placeholder
+{
+    color: #999;
+}
+input:focus::-webkit-input-placeholder/*:: obiektowy operator zasiegu*/
+{
+    color: #1c74b2;
+}
+/* Firefox < 19 */
+input:-moz-placeholder/*nieaktywny napis*/
+{
+    color: #999;
+}
+input:focus:-moz-placeholder/*aktywny napis*/
+{
+    color: #1c74b2;
+}
+/* Firefox > 19 */
+input::-moz-placeholder
+{
+    color: #999;
+}
+input:focus::-moz-placeholder
+{
+    color: #1c74b2;
+}
+/* Internet Explorer 10 */
+input:-ms-input-placeholder
+{
+    color: #999;
+}
+input:focus:-ms-input-placeholder
+{
+    color: #1c74b2;
+}
+
+/*loginPage*/
+#topnav
+{
+	background-color: #1c74b2;
+	text-align: center;
+}
+
+.icon
+{
+	margin: 55px;
+	opacity: 0.1;
+}
+
+/*addIncomes*/
+#add,
+#reset
+{
+	width: 200px;
+	background-color: #3095d3;
+	font-size: 18px;
+	color: #efefef;
+	padding: 12px 6px;
+	margin: 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;/*kursor zmienia sie na łapkę*/
+	letter-spacing: 2px;/*rozstrzelenie liter*/
+	outline: none;
+	-webkit-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+}
+#add:hover,
+#reset:hover
+{
+	background-color: #2084c2;
+}
+
+#comment
+{
+	resize: none; /*nie można zmienić obszaru tekstowego*/
+	background-color: #efefef;
+	font-family: 'Open Sans', sans-serif;
+	color: #666;
+}
+
+#comment:focus
+{
+	-webkit-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
+	-moz-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
+	box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
+	color: #1c74b2;
+}
+
+#income,
+#days
+{
+	background-color: #efefef;
+	width: 160px;
+	height: 40px;
+	font-size: 15px;
+	margin: 10px;
+}
+
+p#titleIncomes
+{
+	text-align: left;
+	font-size: 20px;
+}
+
+.row
+{
+	margin-top: 20px;
+	text-align: left;
+}
+
+.row2
+{
+	margin-top: 10px;
+	text-align: center;
+}
+
+.forms
+{
+	display: inline-block;/*wyśrodkowanie diva w innym divie*/
+	margin-top: 60px;
+	margin-bottom: 10px;
+	/*background-color: #666666;*/
+	padding: 8px 20px 20px 20px;
+	background-image: url("img/kropki.png");
+	border-radius: 7px;
+	height: 410px;
+	-webkit-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+ol
+{
+	padding: 5px;/*pisze sie to standardowo*/
+	margin: 0;
+	list-style-type: none;/* wyłaczenie numerów listy*/
+	font-size: 18px;
+	min-height: 35px;
+	line-height: 200%;/*interlinia, ile linia w pionie zajumje tekstu*/
+	display: inline-block;/*wycnetrowanie ol , liniowy blok przeciwienstow float left, działa to z text-align: center;*/
+}	
+
+ol a/*tylko te a co w ol*/
+{
+	color: #efefef;
+	text-decoration: none;/*wyłaczenie podresleń*/
+	display: block;/*zachowaj sie jak div*/
+	text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+ol > li /*stylizujemy li którego rodzicem jest ol*/
+{
+	float: left;
+	display: inline-block;
+	width: 150px;
+	height: 40px;
+	border-right: 1px dashed #0a2b42;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+ol a:hover
+{
+	/*color: #0a2b42;*/
+	color: #a3defb;
+}
+
+ol > li:first-child /*pierszy element(dziecko) w kodzie*/
+{
+	border-left: 1px dashed #0a2b42;
+}
+
+ol > li > ul
+{
+	list-style-type: none;/*bez kropek*/
+	padding: 0;
+	margin: 0;
+	height: 40px;
+	display: none;/*schowanie listy ul*/
+}
+
+ol > li > ul >li:first-child
+{
+	margin-top: 3px;
+}
+
+ol > li:hover > ul
+{
+	display: block;/*pojawienie się podmenu*/
+}
+
+
+ol > li > ul > li
+{
+	background-color: #1c74b2;
+	position: relative;/*ustawić zeby było przed lista ul i tekstem*/
+	z-index: 100;/*zasłania tekst, obrazki itp*/
+	border-top: 1px dashed #0a2b42;
+	text-shadow: black 0.1em 0.1em 0.2em;
+	margin-left: -10px;
+	margin-right: -10px;
+	padding: 5px;
+}
+ol > li > ul > li:last-child
+{
+	border-radius: 0px 0px 7px 7px;
+}
+
+ol > li > ul > li:hover > a/*zmiana koloru linka*/
+{
+	color: #a3defb;
+}
+
+/*addExpense*/
+.col
+{
+	display: inline-block;
+	margin: 0 10px;
+}
+
+.formsExpense
+{
+	display: inline-block;/*wyśrodkowanie diva w innym divie*/
+	margin-top: 60px;
+	margin-bottom: 10px;
+	/*background-color: #666666;*/
+	padding: 8px 20px 20px 20px;
+	background-image: url("img/kropki.png");
+	border-radius: 7px;
+	height: 565px;
+	-webkit-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	text-shadow: black 0.1em 0.1em 0.2em;
+	text-align: left;
+}
+
+/*balance Month*/
+.formsBalanceMonth
+{
+	display: inline-block;/*wyśrodkowanie diva w innym divie*/
+	margin-top: 20px;
+	margin-bottom: 10px;
+	/*background-color: #666666;*/
+	padding: 8px 20px 20px 20px;
+	background-image: url("img/kropki.png");
+	border-radius: 7px;
+	height: 1580px;
+	width: 900px;
+	-webkit-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	text-shadow: black 0.1em 0.1em 0.2em;
+	text-align: left;
+}
+/*balance*/
+.formsBalance
+{
+	display: inline-block;/*wyśrodkowanie diva w innym divie*/
+	margin-top: 20px;
+	margin-bottom: 10px;
+	/*background-color: #666666;*/
+	padding: 8px 20px 20px 20px;
+	background-image: url("img/kropki.png");
+	border-radius: 7px;
+	height: 1520px;
+	width: 900px;
+	-webkit-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	text-shadow: black 0.1em 0.1em 0.2em;
+	text-align: left;
+}
+
+td, th
+{ 
+	border: 1px solid #1c74b2;
+	padding: 15px;
+	width: 160px;
+}
+
+#container /*wykres*/
+{
+	width: 400px; 
+	height: 400px;
+	margin-top: 30px;
+	background-color: red;
+}
+
+#chart
+{
+	float: right;
+	/*background-color: red;*/
+	margin: 70px 50px 0px 0px;
+}
+
+#button
+{
+	margin: 70px 50px 0px 0px;
+}
+
+#textScore
+{
+	text-align: center;
+	font-size: 24px;
+	margin-top: 270px;
+	text-transform: uppercase; 
+}
+
+/*//////////////////////////////////////////////////////////////////////////*/
+
+/* Dropdown Button */
+.dropbtn 
+{
+	width: 200px;
+	background-color: #3095d3;
+	font-size: 18px;
+	color: #efefef;
+	padding: 12px 6px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;/*kursor zmienia sie na łapkę*/
+	letter-spacing: 2px;/*rozstrzelenie liter*/
+	outline: none;
+	-webkit-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus 
+{
+	background-color: #2084c2;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown 
+{
+	display: inline-block;
+	text-align: center;
+	float: right;
+	position: relative;
+	padding-bottom: 200px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content 
+{
+  display: none;
+  position: absolute;
+  /*background-color: #f1f1f1;*/
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a 
+{
+  color: #efefef;
+  padding: 12px 26px;
+  text-decoration: none;
+  display: block;
+  border: 1px solid #1c74b2;
+  margin-bottom: 1px;
+}
+.dropdown-content a:first-child
+{
+	border-radius: 5px 5px 0px 0px;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover 
+{
+	color: #a3defb;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show 
+{
+	display:block;
+}
+
+.table
+{
+	float: left;
+}
+

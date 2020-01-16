@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+
+	<meta charset="utf-8">
+	<title>Aplikacja budżetu osobistego</title>
+	<meta name="description" content="Aplikacja do prowadzenia budżetu osobistego">
+	<meta name="keywords" content="budzet, budżet, aplikacja, finanse, prowadzenie budżetu">
+	<meta name="author" content="Kamil Pieraszko">
+	
+	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
+	
+	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="css/fontello.css" type="text/css" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
+
+	<script src="https://cdn.anychart.com/js/8.0.1/anychart-core.min.js"></script><!--wykres-->
+    <script src="https://cdn.anychart.com/js/8.0.1/anychart-pie.min.js"></script><!--wykres-->
+	<script src="date.js"></script>
+	
+	<!--[if lt IE 9]>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<![endif]--> <!--skrypt dla IE mniejszej niż wersja 9 żeby wszystko wygladało ok-->
+	
+</head>
+
+<body onload="today();">
+
+	<header>
+		
+		<h1 class="logo">Budżet osobisty<i class="icon-money"></i></h1>
+		
+		<nav id="topnav">
+			
+			<ol>
+				<li><a href="loginPage.html">Strona główna</a></li>
+				<li><a href="addIncomes.html">Dodaj przychód</a></li>
+				<li><a href="addExpense.html">Dodaj wydatek</a></li>
+				<li><a href="balance.html">Przeglądaj bilans</a>
+					<ul>
+						<li><a href="balanceMonth.html">Bieżący miesiąc</a></li>
+						<li><a href="#">Poprzedni miesiąc</a></li>
+						<li><a href="#">Bieżący rok</a></li>
+						<li><a href="#">Niestandardowy</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Ustawienia</a></li>
+				<li><a href="index.html">Wyloguj się</a></li>
+			</ol>
+			
+		</nav>
+		
+	</header>
+	
+	<main>
+			
+			<section>
+			
+				<div class="categories">
+				
+					<header>
+					
+						<!--<h2>Witaj w aplikacji do prowadzenia budżetu osobistego.</h2>-->
+						<p>Na tej stronie możesz zobaczyć swoje przychody i wydatki z różnych okresów. Proszę wybrać odpowiedni okres roku, z którego chcesz przeglądnąć swój bilans finansowy.</p>
+					
+					</header>
+										
+					<div class="formsBalance">
+					
+						<div class="table">
+
+							<p id="titleIncomes"> Przychody: </p>
+							
+							<table>
+							   <thead>
+								  <tr> <th> Kategorie <th> Przychód
+							   <tbody>
+								  <tr> <th> Wynagrodzenie <td> kwota
+								  <tr> <th> Odsetki bankowe <td> kwota
+								  <tr> <th> Allegro <td> kwota 
+								  <tr> <th> Inne  <td> kwota
+							</table>
+						
+							<p id="titleIncomes"> Wydatki: </p>
+							
+							<table>
+							   <thead>
+								  <tr> <th> Kategorie <th> Wydatki
+							   <tbody>
+								  <tr> <th> Jedzenie <td> kwota
+								  <tr> <th> Mieszkanie<td> kwota
+								  <tr> <th> Transport  <td> kwota 
+								  <tr> <th> Telekomunikacja <td> kwota
+								  <tr> <th> Opieka zdrowotna <td> kwota
+								  <tr> <th> Ubranie <td> kwota
+								  <tr> <th> Higiena <td> kwota
+								  <tr> <th> Dzieci <td> kwota
+								  <tr> <th> Rozrywka <td> kwota
+								  <tr> <th> Wycieczka <td> kwota
+								  <tr> <th> Szkolenia <td> kwota
+								  <tr> <th> Oszczędności <td> kwota
+								  <tr> <th> Na emeryture <td> kwota
+								  <tr> <th> Spłata długów <td> kwota
+								  <tr> <th> Darowizna <td> kwota
+								  <tr> <th>  Inne wydatki <td> kwota
+							</table>
+							
+							<p id="titleIncomes"> Bilans z podanego okresu: </p>
+							
+							<table>
+							   <thead>
+								  <tr> <th> Bilans: <th> kwota
+							   <tbody>
+							 </table>
+							 
+						</div>
+		
+						<div id="button">
+			
+							<div class="dropdown">
+							
+							  <button onclick="myFunction()" class="dropbtn">Wybierz okres</button>
+							  <div id="myDropdown" class="dropdown-content">
+								<a href="balanceMonth.html">Bieżący miesiąc</a>
+								<a href="#">Poprzedni miesiąc</a>
+								<a href="#">Bieżący rok</a>
+								<a href="#">Niestandardowy</a>
+							  </div>
+							  
+							</div>
+							
+						</div>
+							
+						<div id="chart">
+							
+							<div id="container"></div><!--wykres-->
+							
+							<p id="textScore">Wpadasz w dlugi !!!</p>
+						
+						</div>
+	
+					</div>
+
+				</div>
+			
+			</section>
+			
+	</main>
+	
+	<footer>
+		
+		<div class="info">
+			Wszelkie prawa zastrzeżone &copy; 2019 Dziękuję za wizytę!
+		</div>
+	
+	</footer>
+
+</body>
+</html>
