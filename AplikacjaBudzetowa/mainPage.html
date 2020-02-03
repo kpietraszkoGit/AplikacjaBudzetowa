@@ -17,19 +17,19 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
 	
-	<script src="date.js"></script>
 	<!--[if lt IE 9]>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<![endif]-->
 </head>
 
-<body onload="today();">
+<body>
 
 	<header>
 		
 		<div class="logo2">
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
+		
 		<!--<h1 class="logo">Personal Budget<i class="icon-money"></i></h1>-->
 		<!--<p id="quotation">"Bądź oszczędnym, abyś mógł być szczodrym." – Aleksander Fredro</p>-->
 		<nav class="navbar navbar-custom bg-gold navbar-expand-lg mb-4 mt-1 menu"><!--navbar-dark cimny kolor logo, bg-primary-kolor tła, navbar-expand-md- menu rozwijaj sie od widoku medium, lg-od dużego rozmiaru-->
@@ -44,7 +44,7 @@
 				
 				<ul class="navbar-nav mx-auto"><!--mr-auto-margin automatyczny-->
 				
-					<li class="nav-item"><!--trzeba pisać takie klasy, active-wyróżniona zakładka w menu-->
+					<li class="nav-item active"><!--trzeba pisać takie klasy, active-wyróżniona zakładka w menu-->
 						<a class="nav-link" href="mainPage.html"><i class="icon-home"></i> Strona Główna </a>
 					</li>
 					
@@ -52,7 +52,7 @@
 						<a class="nav-link" href="addIncome.html"><i class="icon-dollar"></i> Dodaj Przychód </a>
 					</li>
 					
-					<li class="nav-item active">
+					<li class="nav-item">
 						<a class="nav-link" href="addExpense.html"><i class="icon-bag"></i> Dodaj Wydatek </a>
 					</li>
 					
@@ -104,10 +104,10 @@
                     <div class="col-lg-3 register-left">
                        <!-- <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>-->
 						<div id="icon"><i class="icon-money-1"></i></div>
-                        <!--<div class="welcome col-md-12">Witaj</div>
-						<div id="name2" class="welcome col-md-12 mb-1">Kamil</div>-->
-						<!--<h3>Witaj Kamil</h3>-->
-                        <p> "Sposoby wzbogacania się są liczne. Oszczędzanie jest jednym z najlepszych." <br> – Francis Bacon –</p>
+						<div class="welcome col-md-12">Witaj</div>
+						<div id="name2" class="welcome col-md-12 mb-1">Kamil</div>
+                        <!--<h3>Witaj Kamil</h3>-->
+                        <p>W menu głównym możesz wybrać opcje dodania przychodu i wydatku oraz przeglądać swój bilans finansowy z różnego okresu.</p>
                     </div>
 					
                     <div class="col-lg-9 register-right">
@@ -116,92 +116,14 @@
                         <div class="tab-content" id="myTabContent">
 						
                          
-                                <h3 class="register-heading2">Wprowadź dane wydatku:</h3>
+                                <h3 class="register-heading">Logowanie powiodło się!</h3>
 								
-                                <div class="row register-form">
+                                <div class="row description-form">
 								
-                                    <div class="col-md-10 inputs offset-md-1">
-
-                                        <div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-pencil'></i>
-											</div>
-											<input type="number"  class="form-control" name="amount" step="0.01" placeholder="Kwota *" value="" required />
-                                        </div>     
-										
-										<div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-calendar'></i>
-											</div>
-											<input type="date" id="days"  class="form-control" name="day" value="" min="1900-01-01" max="2500-01-01" required />
-                                        </div>
-										
-										<div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-wallet'></i>
-											</div>
-											<select class="form-control category" name="category">
-											
-												<option value="" selected disabled>Sposób płatności *</option>
-												<option value="">Gotówka</option>
-												<option value="">Karta debetowa</option>
-												<option value="">Karta kredytowa</option>
-											
-											</select>
-                                        </div>
-										
-                                        <div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-list-bullet'></i>
-											</div>
-											<select class="form-control category" name="category">
-											
-												<option value="" selected disabled>Kategorie wydatku *</option>
-												<option value="">Jedzenie</option>
-												<option value="">Mieszkanie</option>
-												<option value="">Transport</option>
-												<option value="">Telekomunikacja</option>
-												<option value="">Opieka zdrowotna</option>
-												<option value="">Ubranie</option>
-												<option value="">Higiena</option>
-												<option value="">Dzieci</option>
-												<option value="">Rozrywka</option>
-												<option value="">Wycieczka</option>
-												<option value="">Szkolenia</option>
-												<option value="">Oszczędności</option>
-												<option value="">Na emeryture</option>
-												<option value="">Spłata długów</option>
-												<option value="">Darowizna</option>
-												<option value="">Inne...</option>
-											
-											</select>
-                                        </div>
-										
-										<div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-pencil'></i>
-											</div>
-                                            <input type="text" class="form-control" placeholder="Komentarz *" value="" />
-                                        </div>
-										
-                                    </div>
-							
-									<div class="col-md-12 buttonsExpense">
+                                 <p class="description">Pierwszy krok do planowania swojego domowego budżetu wykonany. Co chcesz teraz zrobić?</p>
+								 
+								 <img src="img/mysliciel.png" alt="money" class="img-fluid" />
 									
-										<input type="submit" class="btn-success btnRegister2"  value="Dodaj"/>
-										
-										<input type="submit" class="btn-danger btnRegister2"  value="Anuluj"/>
-									
-									</div>
-										
-									<!--</div>
-									
-									<div class="col-sm-6 buttons">
-										
-										<input type="submit" class="btn-success btnRegister2"  value="Dodaj"/>
-										
-									</div>-->
-
                                 </div>
 							
                         </div>
@@ -223,6 +145,21 @@
 		</div>
 	
 	</footer>
+	
+	<script><!--pokazanie imienia-->
+		  function getUrlVars() {
+			var vars = {};
+			var url = decodeURIComponent(window.location.href.replace(/\+/g, '%20'));
+			var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, 
+				  function(m,key,value) {
+			  vars[key] = value;
+			});
+			return vars;
+		  }
+
+		  var text = getUrlVars()["imie"];
+		  document.getElementById("name2").innerHTML = text;
+	</script>
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	

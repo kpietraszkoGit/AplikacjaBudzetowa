@@ -26,7 +26,7 @@
 <body onload="today();">
 
 	<header>
-		
+	
 		<div class="logo2">
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
@@ -48,11 +48,11 @@
 						<a class="nav-link" href="mainPage.html"><i class="icon-home"></i> Strona Główna </a>
 					</li>
 					
-					<li class="nav-item">
+					<li class="nav-item active">
 						<a class="nav-link" href="addIncome.html"><i class="icon-dollar"></i> Dodaj Przychód </a>
 					</li>
 					
-					<li class="nav-item active">
+					<li class="nav-item">
 						<a class="nav-link" href="addExpense.html"><i class="icon-bag"></i> Dodaj Wydatek </a>
 					</li>
 					
@@ -107,16 +107,16 @@
                         <!--<div class="welcome col-md-12">Witaj</div>
 						<div id="name2" class="welcome col-md-12 mb-1">Kamil</div>-->
 						<!--<h3>Witaj Kamil</h3>-->
-                        <p> "Sposoby wzbogacania się są liczne. Oszczędzanie jest jednym z najlepszych." <br> – Francis Bacon –</p>
+                        <p>"Oszczędność jest to umiejętność unikania zbędnych wydatków." <br> – Seneka Młodszy –</p>
                     </div>
-					
+
                     <div class="col-lg-9 register-right">
                         
 						
                         <div class="tab-content" id="myTabContent">
 						
                          
-                                <h3 class="register-heading2">Wprowadź dane wydatku:</h3>
+                                <h3 class="register-heading2">Wprowadź dane przychodu:</h3>
 								
                                 <div class="row register-form">
 								
@@ -133,21 +133,7 @@
 											<div class="icons">
 												<i class='icon-calendar'></i>
 											</div>
-											<input type="date" id="days"  class="form-control" name="day" value="" min="1900-01-01" max="2500-01-01" required />
-                                        </div>
-										
-										<div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-wallet'></i>
-											</div>
-											<select class="form-control category" name="category">
-											
-												<option value="" selected disabled>Sposób płatności *</option>
-												<option value="">Gotówka</option>
-												<option value="">Karta debetowa</option>
-												<option value="">Karta kredytowa</option>
-											
-											</select>
+											<input type="date" id="days" class="form-control" name="day" value="" min="1900-01-01" max="2500-01-01" required />
                                         </div>
 										
                                         <div class="form-group col-md-9 mx-auto">
@@ -156,22 +142,10 @@
 											</div>
 											<select class="form-control category" name="category">
 											
-												<option value="" selected disabled>Kategorie wydatku *</option>
-												<option value="">Jedzenie</option>
-												<option value="">Mieszkanie</option>
-												<option value="">Transport</option>
-												<option value="">Telekomunikacja</option>
-												<option value="">Opieka zdrowotna</option>
-												<option value="">Ubranie</option>
-												<option value="">Higiena</option>
-												<option value="">Dzieci</option>
-												<option value="">Rozrywka</option>
-												<option value="">Wycieczka</option>
-												<option value="">Szkolenia</option>
-												<option value="">Oszczędności</option>
-												<option value="">Na emeryture</option>
-												<option value="">Spłata długów</option>
-												<option value="">Darowizna</option>
+												<option value="" selected disabled>Kategorie przychodu *</option>
+												<option value="">Wynagrodzenie</option>
+												<option value="">Odsetki bankowe</option>
+												<option value="">Sprzedaż na allegro</option>
 												<option value="">Inne...</option>
 											
 											</select>
@@ -186,7 +160,7 @@
 										
                                     </div>
 							
-									<div class="col-md-12 buttonsExpense">
+									<div class="col-md-12 buttons">
 									
 										<input type="submit" class="btn-success btnRegister2"  value="Dodaj"/>
 										
