@@ -1,3 +1,25 @@
+<?php
+
+	session_start();//zeby tablica session działała,globalny pojemnik na dane
+	
+	if (isset($_SESSION['ok'])) unset($_SESSION['ok']);//kasowanie informacji o dodaniu przychodu
+	if (isset($_SESSION['ok2'])) unset($_SESSION['ok2']);
+	
+	if (!isset($_SESSION['logged']))//jesli zmienna nie bedzie ustawiona, czyli zalogowani nie bedziemy
+	{
+		header('Location: index.php');
+		exit();
+	}
+	
+	$dbhandle = new mysqli('localhost','root','','aplikacjabudzetowa');
+	echo $dbhandle->connect_error;
+	
+	$user_id = $_SESSION['id'];
+	
+	$query = "SELECT user_id, SUM(amount), expense_category_assigned_to_user_id FROM expenses WHERE YEAR(date_of_expense) = YEAR(CURDATE()) AND user_id='$user_id' GROUP BY  expense_category_assigned_to_user_id ORDER BY SUM(amount) DESC";
+	$res = $dbhandle->query($query);
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -20,6 +42,39 @@
 	<!--[if lt IE 9]>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<![endif]-->
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['id', 'amount'],
+          
+          <?php 
+			//while($row=$res->fetch_assoc())
+			while($row = mysqli_fetch_array($res))
+			{
+				echo "['".$row['expense_category_assigned_to_user_id']."',".$row[ 'SUM(amount)']."],";
+			}
+
+          ?>
+
+        ]);
+
+        var options = {
+          title: 'Wydatki',
+         // is3D:true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+	
+
 </head>
 
 <body>
@@ -29,7 +84,7 @@
 		<div class="logo2">
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
-		
+
 		<!--<h1 class="logo">Personal Budget<i class="icon-money"></i></h1>-->
 		<!--<p id="quotation">"Bądź oszczędnym, abyś mógł być szczodrym." – Aleksander Fredro</p>-->
 		<nav class="navbar navbar-custom bg-gold navbar-expand-lg mb-4 mt-1 menu"><!--navbar-dark cimny kolor logo, bg-primary-kolor tła, navbar-expand-md- menu rozwijaj sie od widoku medium, lg-od dużego rozmiaru-->
@@ -45,15 +100,15 @@
 				<ul class="navbar-nav mx-auto"><!--mr-auto-margin automatyczny-->
 				
 					<li class="nav-item active"><!--trzeba pisać takie klasy, active-wyróżniona zakładka w menu-->
-						<a class="nav-link" href="mainPage.html"><i class="icon-home"></i> Strona Główna </a>
+						<a class="nav-link" href="mainPage.php"><i class="icon-home"></i> Strona Główna </a>
 					</li>
 					
 					<li class="nav-item">
-						<a class="nav-link" href="addIncome.html"><i class="icon-dollar"></i> Dodaj Przychód </a>
+						<a class="nav-link" href="addIncome.php"><i class="icon-dollar"></i> Dodaj Przychód </a>
 					</li>
 					
 					<li class="nav-item">
-						<a class="nav-link" href="addExpense.html"><i class="icon-bag"></i> Dodaj Wydatek </a>
+						<a class="nav-link" href="addExpense.php"><i class="icon-bag"></i> Dodaj Wydatek </a>
 					</li>
 					
 					<!--<li class="nav-item dropdown">
@@ -74,7 +129,7 @@
 					</li>-->
 					
 					<li class="nav-item">
-						<a class="nav-link" href="monthlyBalance.html"><i class="icon-chart-bar"></i> Przeglądaj Bilans </a>
+						<a class="nav-link" href="monthlyBalance.php"><i class="icon-chart-bar"></i> Przeglądaj Bilans </a>
 					</li>
 					
 					<li class="nav-item">
@@ -82,7 +137,7 @@
 					</li>
 					
 					<li class="nav-item">
-						<a class="nav-link" href="index.html"><i class="icon-logout"></i> Wyloguj się </a>
+						<a class="nav-link" href="logout.php"><i class="icon-logout"></i> Wyloguj się </a>
 					</li>
 				
 				</ul>
@@ -100,13 +155,14 @@
 			<div class="container register">
 			
                 <div class="row">
-				
+
                     <div class="col-lg-3 register-left">
                        <!-- <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>-->
 						<div id="icon"><i class="icon-money-1"></i></div>
 						<div class="welcome col-md-12">Witaj</div>
-						<div id="name2" class="welcome col-md-12 mb-1">Kamil</div>
-                        <!--<h3>Witaj Kamil</h3>-->
+						<?php
+							echo "<div id='name2' class='welcome col-md-12 mb-1'>".$_SESSION['username']."</div>";
+						?>	
                         <p>W menu głównym możesz wybrać opcje dodania przychodu i wydatku oraz przeglądać swój bilans finansowy z różnego okresu.</p>
                     </div>
 					
@@ -143,23 +199,9 @@
 		<div class="info">
 			Wszelkie prawa zastrzeżone &copy; 2019 Dziękuję za wizytę!
 		</div>
-	
-	</footer>
-	
-	<script><!--pokazanie imienia-->
-		  function getUrlVars() {
-			var vars = {};
-			var url = decodeURIComponent(window.location.href.replace(/\+/g, '%20'));
-			var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, 
-				  function(m,key,value) {
-			  vars[key] = value;
-			});
-			return vars;
-		  }
-
-		  var text = getUrlVars()["imie"];
-		  document.getElementById("name2").innerHTML = text;
-	</script>
+		<!--wykres-->
+	<div id="piechart" style="width: 900px; height: 500px;"></div>
+	</footer>	
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	

@@ -1,3 +1,58 @@
+<?php
+
+	session_start();//zeby tablica session działała,globalny pojemnik na dane	
+	
+	if (isset($_SESSION['ok'])) unset($_SESSION['ok']);
+	
+	if (!isset($_SESSION['logged']))//jesli zmienna nie bedzie ustawiona, czyli zalogowani nie bedziemy
+	{
+		header('Location: index.php');
+		exit();
+	}
+	
+	if (isset($_POST['amount']))
+	{
+		$user_id = $_SESSION['id'];
+		$amount = $_POST['amount'];
+		$day = $_POST['day'];
+		$pay= $_POST['pay'];
+		$category = $_POST['category'];
+		$comment = $_POST['comment'];
+		
+
+		require_once "connect.php";
+		mysqli_report(MYSQLI_REPORT_STRICT);
+			
+			try 
+			{
+				$connection = new mysqli($host, $db_user, $db_password, $db_name);
+				if ($connection->connect_errno!=0)
+				{
+					throw new Exception(mysqli_connect_errno());
+				}
+				else
+				{
+					if($connection->query("INSERT INTO expenses VALUES (NULL, '$user_id', '$category ', '$pay ', '$amount', '$day', '$comment')"))
+					{
+						$_SESSION['ok2'] = '<span>Wydatek został dodany!</span>';
+					}
+					else
+					{
+						throw new Exception($connection->error);
+					}
+					
+					$connection->close();
+				}
+			}
+			catch(Exception $e)
+			{
+				echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogodności!</span>';
+				echo '<br />Informacja developerska: '.$e;
+			}
+	
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -26,7 +81,7 @@
 <body onload="today();">
 
 	<header>
-	
+		
 		<div class="logo2">
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
@@ -45,15 +100,15 @@
 				<ul class="navbar-nav mx-auto"><!--mr-auto-margin automatyczny-->
 				
 					<li class="nav-item"><!--trzeba pisać takie klasy, active-wyróżniona zakładka w menu-->
-						<a class="nav-link" href="mainPage.html"><i class="icon-home"></i> Strona Główna </a>
-					</li>
-					
-					<li class="nav-item active">
-						<a class="nav-link" href="addIncome.html"><i class="icon-dollar"></i> Dodaj Przychód </a>
+						<a class="nav-link" href="mainPage.php"><i class="icon-home"></i> Strona Główna </a>
 					</li>
 					
 					<li class="nav-item">
-						<a class="nav-link" href="addExpense.html"><i class="icon-bag"></i> Dodaj Wydatek </a>
+						<a class="nav-link" href="addIncome.php"><i class="icon-dollar"></i> Dodaj Przychód </a>
+					</li>
+					
+					<li class="nav-item active">
+						<a class="nav-link" href="addExpense.php"><i class="icon-bag"></i> Dodaj Wydatek </a>
 					</li>
 					
 					<!--<li class="nav-item dropdown">
@@ -74,7 +129,7 @@
 					</li>-->
 					
 					<li class="nav-item">
-						<a class="nav-link" href="monthlyBalance.html"><i class="icon-chart-bar"></i> Przeglądaj Bilans </a>
+						<a class="nav-link" href="monthlyBalance.php"><i class="icon-chart-bar"></i> Przeglądaj Bilans </a>
 					</li>
 					
 					<li class="nav-item">
@@ -82,7 +137,7 @@
 					</li>
 					
 					<li class="nav-item">
-						<a class="nav-link" href="index.html"><i class="icon-logout"></i> Wyloguj się </a>
+						<a class="nav-link" href="logout.php"><i class="icon-logout"></i> Wyloguj się </a>
 					</li>
 				
 				</ul>
@@ -107,16 +162,17 @@
                         <!--<div class="welcome col-md-12">Witaj</div>
 						<div id="name2" class="welcome col-md-12 mb-1">Kamil</div>-->
 						<!--<h3>Witaj Kamil</h3>-->
-                        <p>"Oszczędność jest to umiejętność unikania zbędnych wydatków." <br> – Seneka Młodszy –</p>
+                        <p> "Sposoby wzbogacania się są liczne. Oszczędzanie jest jednym z najlepszych." <br> – Francis Bacon –</p>
                     </div>
-
+					
                     <div class="col-lg-9 register-right">
                         
 						
                         <div class="tab-content" id="myTabContent">
 						
-                         
-                                <h3 class="register-heading2">Wprowadź dane przychodu:</h3>
+							<form method="post">
+							
+                                <h3 class="register-heading2">Wprowadź dane wydatku:</h3>
 								
                                 <div class="row register-form">
 								
@@ -133,7 +189,21 @@
 											<div class="icons">
 												<i class='icon-calendar'></i>
 											</div>
-											<input type="date" id="days" class="form-control" name="day" value="" min="1900-01-01" max="2500-01-01" required />
+											<input type="date" id="days"  class="form-control" name="day" value="" min="1900-01-01" max="2500-01-01" required />
+                                        </div>
+										
+										<div class="form-group col-md-9 mx-auto">
+											<div class="icons">
+												<i class='icon-wallet'></i>
+											</div>
+											<select class="form-control category" name="pay">
+											
+												<option value="0" selected disabled>Sposób płatności *</option>
+												<option value="1">Gotówka</option>
+												<option value="2">Karta debetowa</option>
+												<option value="3">Karta kredytowa</option>
+											
+											</select>
                                         </div>
 										
                                         <div class="form-group col-md-9 mx-auto">
@@ -142,11 +212,23 @@
 											</div>
 											<select class="form-control category" name="category">
 											
-												<option value="" selected disabled>Kategorie przychodu *</option>
-												<option value="">Wynagrodzenie</option>
-												<option value="">Odsetki bankowe</option>
-												<option value="">Sprzedaż na allegro</option>
-												<option value="">Inne...</option>
+												<option value="0" selected disabled>Kategorie wydatku *</option>
+												<option value="1">Transport</option>
+												<option value="2">Książki</option>
+												<option value="3">Jedzenie</option>
+												<option value="4">Mieszkanie</option>
+												<option value="5">Telekomunikacja</option>
+												<option value="6">Opieka zdrowotna</option>
+												<option value="7">Ubranie</option>
+												<option value="8">Higiena</option>
+												<option value="9">Dzieci</option>
+												<option value="10">Rozrywka</option>
+												<option value="11">Wycieczka</option>
+												<option value="12">Oszczędności</option>
+												<option value="13">Na emeryture</option>
+												<option value="14">Spłata długów</option>
+												<option value="15">Darowizna</option>
+												<option value="16">Inne...</option>
 											
 											</select>
                                         </div>
@@ -155,16 +237,24 @@
 											<div class="icons">
 												<i class='icon-pencil'></i>
 											</div>
-                                            <input type="text" class="form-control" placeholder="Komentarz *" value="" />
+                                            <input type="text" class="form-control" placeholder="Komentarz *" name="comment"
+											value="" />
                                         </div>
 										
                                     </div>
+									
+									<?php
+										if(isset($_SESSION['ok2']))
+										{	
+											 echo "<div id='name2' class='add'>".$_SESSION['ok2']."</div>";
+										}
+									?>
 							
-									<div class="col-md-12 buttons">
+									<div class="col-md-12 buttonsExpense">
 									
 										<input type="submit" class="btn-success btnRegister2"  value="Dodaj"/>
 										
-										<input type="submit" class="btn-danger btnRegister2"  value="Anuluj"/>
+										<input type="reset" class="btn-danger btnRegister2"  value="Anuluj"/>
 									
 									</div>
 										
@@ -177,6 +267,8 @@
 									</div>-->
 
                                 </div>
+								
+							</form>	
 							
                         </div>
 						

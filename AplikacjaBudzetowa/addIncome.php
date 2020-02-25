@@ -1,3 +1,58 @@
+<?php
+
+	session_start();//zeby tablica session działała,globalny pojemnik na dane	
+	
+	if (isset($_SESSION['ok2'])) unset($_SESSION['ok2']);
+	
+	if (!isset($_SESSION['logged']))//jesli zmienna nie bedzie ustawiona, czyli zalogowani nie bedziemy
+	{
+		header('Location: index.php');
+		exit();
+	}
+	
+	if (isset($_POST['amount']))
+	{
+		$user_id = $_SESSION['id'];
+		$amount = $_POST['amount'];
+		$day = $_POST['day'];
+		$category = $_POST['category'];
+		$comment = $_POST['comment'];
+		
+
+		require_once "connect.php";
+		mysqli_report(MYSQLI_REPORT_STRICT);
+			
+			try 
+			{
+				$connection = new mysqli($host, $db_user, $db_password, $db_name);
+				if ($connection->connect_errno!=0)
+				{
+					throw new Exception(mysqli_connect_errno());
+				}
+				else
+				{
+					if($connection->query("INSERT INTO incomes VALUES (NULL, '$user_id', '$category ', '$amount', '$day', '$comment')"))
+					{
+						$_SESSION['ok'] = '<span>Przychód został dodany!</span>';
+					}
+					else
+					{
+						throw new Exception($connection->error);
+					}
+					
+					$connection->close();
+				}
+			}
+			catch(Exception $e)
+			{
+				echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogodności!</span>';
+				echo '<br />Informacja developerska: '.$e;
+			}
+	
+	}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -26,7 +81,7 @@
 <body onload="today();">
 
 	<header>
-		
+	
 		<div class="logo2">
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
@@ -45,15 +100,15 @@
 				<ul class="navbar-nav mx-auto"><!--mr-auto-margin automatyczny-->
 				
 					<li class="nav-item"><!--trzeba pisać takie klasy, active-wyróżniona zakładka w menu-->
-						<a class="nav-link" href="mainPage.html"><i class="icon-home"></i> Strona Główna </a>
-					</li>
-					
-					<li class="nav-item">
-						<a class="nav-link" href="addIncome.html"><i class="icon-dollar"></i> Dodaj Przychód </a>
+						<a class="nav-link" href="mainPage.php"><i class="icon-home"></i> Strona Główna </a>
 					</li>
 					
 					<li class="nav-item active">
-						<a class="nav-link" href="addExpense.html"><i class="icon-bag"></i> Dodaj Wydatek </a>
+						<a class="nav-link" href="addIncome.php"><i class="icon-dollar"></i> Dodaj Przychód </a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="addExpense.php"><i class="icon-bag"></i> Dodaj Wydatek </a>
 					</li>
 					
 					<!--<li class="nav-item dropdown">
@@ -74,7 +129,7 @@
 					</li>-->
 					
 					<li class="nav-item">
-						<a class="nav-link" href="monthlyBalance.html"><i class="icon-chart-bar"></i> Przeglądaj Bilans </a>
+						<a class="nav-link" href="monthlyBalance.php"><i class="icon-chart-bar"></i> Przeglądaj Bilans </a>
 					</li>
 					
 					<li class="nav-item">
@@ -82,7 +137,7 @@
 					</li>
 					
 					<li class="nav-item">
-						<a class="nav-link" href="index.html"><i class="icon-logout"></i> Wyloguj się </a>
+						<a class="nav-link" href="logout.php"><i class="icon-logout"></i> Wyloguj się </a>
 					</li>
 				
 				</ul>
@@ -107,93 +162,74 @@
                         <!--<div class="welcome col-md-12">Witaj</div>
 						<div id="name2" class="welcome col-md-12 mb-1">Kamil</div>-->
 						<!--<h3>Witaj Kamil</h3>-->
-                        <p> "Sposoby wzbogacania się są liczne. Oszczędzanie jest jednym z najlepszych." <br> – Francis Bacon –</p>
+                        <p>"Oszczędność jest to umiejętność unikania zbędnych wydatków." <br> – Seneka Młodszy –</p>
                     </div>
-					
+
                     <div class="col-lg-9 register-right">
                         
 						
                         <div class="tab-content" id="myTabContent">
 						
-                         
-                                <h3 class="register-heading2">Wprowadź dane wydatku:</h3>
+							<form method="post">
+							
+                                <h3 class="register-heading2">Wprowadź dane przychodu:</h3>
 								
                                 <div class="row register-form">
+									
+										<div class="col-md-10 inputs offset-md-1">
+										
+											<div class="form-group col-md-9 mx-auto">
+												<div class="icons">
+													<i class='icon-pencil'></i>
+												</div>
+												<input type="number"  class="form-control" name="amount" step="0.01" placeholder="Kwota *" value="" required />
+											</div>     
+											
+											<div class="form-group col-md-9 mx-auto">
+												<div class="icons">
+													<i class='icon-calendar'></i>
+												</div>
+												<input type="date" id="days" class="form-control" name="day" value="" min="1900-01-01" max="2500-01-01" required />
+											</div>
+											
+											<div class="form-group col-md-9 mx-auto">
+												<div class="icons">
+													<i class='icon-list-bullet'></i>
+												</div>
+												<select class="form-control category" name="category">
+												
+													<option value="0" selected disabled>Kategorie przychodu *</option>
+													<option value="1">Wynagrodzenie</option>
+													<option value="2">Odsetki bankowe</option>
+													<option value="3">Sprzedaż na allegro</option>
+													<option value="4">Inne...</option>
+												
+												</select>
+											</div>
+											
+											<div class="form-group col-md-9 mx-auto">
+												<div class="icons">
+													<i class='icon-pencil'></i>
+												</div>
+												<input type="text" class="form-control" placeholder="Komentarz *" name="comment" value="" />
+											</div>
+												
+										</div>
+										
+										<?php
+												if(isset($_SESSION['ok']))
+												{	
+													 echo "<div id='name2' class='add'>".$_SESSION['ok']."</div>";
+												}
+											?>
 								
-                                    <div class="col-md-10 inputs offset-md-1">
-
-                                        <div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-pencil'></i>
-											</div>
-											<input type="number"  class="form-control" name="amount" step="0.01" placeholder="Kwota *" value="" required />
-                                        </div>     
+										<div class="col-md-12 buttons">
 										
-										<div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-calendar'></i>
-											</div>
-											<input type="date" id="days"  class="form-control" name="day" value="" min="1900-01-01" max="2500-01-01" required />
-                                        </div>
-										
-										<div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-wallet'></i>
-											</div>
-											<select class="form-control category" name="category">
+											<input type="submit" class="btn-success btnRegister2"  value="Dodaj"/>
 											
-												<option value="" selected disabled>Sposób płatności *</option>
-												<option value="">Gotówka</option>
-												<option value="">Karta debetowa</option>
-												<option value="">Karta kredytowa</option>
-											
-											</select>
-                                        </div>
+											<input type="reset" class="btn-danger btnRegister2"  value="Anuluj"/>
 										
-                                        <div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-list-bullet'></i>
-											</div>
-											<select class="form-control category" name="category">
-											
-												<option value="" selected disabled>Kategorie wydatku *</option>
-												<option value="">Jedzenie</option>
-												<option value="">Mieszkanie</option>
-												<option value="">Transport</option>
-												<option value="">Telekomunikacja</option>
-												<option value="">Opieka zdrowotna</option>
-												<option value="">Ubranie</option>
-												<option value="">Higiena</option>
-												<option value="">Dzieci</option>
-												<option value="">Rozrywka</option>
-												<option value="">Wycieczka</option>
-												<option value="">Szkolenia</option>
-												<option value="">Oszczędności</option>
-												<option value="">Na emeryture</option>
-												<option value="">Spłata długów</option>
-												<option value="">Darowizna</option>
-												<option value="">Inne...</option>
-											
-											</select>
-                                        </div>
-										
-										<div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-pencil'></i>
-											</div>
-                                            <input type="text" class="form-control" placeholder="Komentarz *" value="" />
-                                        </div>
-										
-                                    </div>
-							
-									<div class="col-md-12 buttonsExpense">
-									
-										<input type="submit" class="btn-success btnRegister2"  value="Dodaj"/>
-										
-										<input type="submit" class="btn-danger btnRegister2"  value="Anuluj"/>
-									
-									</div>
-										
+										</div>
 									<!--</div>
 									
 									<div class="col-sm-6 buttons">
@@ -203,6 +239,8 @@
 									</div>-->
 
                                 </div>
+								
+							</form>
 							
                         </div>
 						

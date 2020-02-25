@@ -46,6 +46,12 @@ h1.logo
 	font-size: 30px;
 }
 
+.dateRange
+{
+	float: left;
+	font-size: 18px;
+}
+
 /*bootstrap*/
 .register
 {
@@ -145,7 +151,7 @@ h1.logo
 .btnRegister
 {
     float: right;
-    margin-top: 6%;
+    margin-top: 4%;
 	border: solid 1px #e0a32a;
     border-radius: 1.5rem;
     padding: 2%;
@@ -226,9 +232,13 @@ h1.logo
 
 .inputs
 {
-	height: 170px;
-	/*background-color: red;*/
+	height: 100%;
 }
+
+/*.inputs2
+{
+	height: 226px;
+}*/
 
 .form-control
 {
@@ -355,7 +365,7 @@ input[type=reset]:hover
 
 .buttons
 {
-	margin-top: 40px;
+	margin-top: 10px;
 }
 
 .btnRegister2:active, .btnRegister2:focus
@@ -387,7 +397,7 @@ input[type=reset]:hover
 /*addExpense*/
 .buttonsExpense
 {
-	margin-top: 90px;
+	margin-top: 10px;
 }
 
 /*monthlyBalance*/
@@ -545,8 +555,8 @@ input[type=reset]:hover
 
 td, th
 { 
-	border: dotted 1px #e0a32a;
-	padding: 2%;
+	border-bottom: dotted 1px #e0a32a;
+	border-left: dotted 1px #e0a32a;
 }
 
 table
@@ -554,14 +564,27 @@ table
 	margin-bottom: 5%;
 	margin-left: auto;
 	margin-right: auto;
-	border-radius: 12px;
 	color: #495057;
+	border: dotted 1px #e0a32a;
 }
+
 
 #sum
 {
-	font-size: 24px;
+	font-size: 22px;
 	color: #e04e2a;/*jak bedzie dobrze to zielnoy kolor*/
+	text-align: center;
+	margin: 3%;
+	font-weight: 700;
+	border: dotted 1px #e0a32a;
+	border-radius: 1.5rem;
+	/*background-color: #ffce85;*/
+	text-shadow: 2px 1px 1px #FFFFFF;
+}
+#sum2
+{
+	font-size: 22px;
+	color: green;/*jak bedzie dobrze to zielnoy kolor*/
 	text-align: center;
 	margin: 3%;
 	font-weight: 700;
@@ -582,4 +605,41 @@ table
 	font-weight: 700;
 	color: #e0972a;
 }
+
+.error
+{
+	color:red;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	text-align: center;
+}
+
+.add
+{
+    margin-top: 1%;
+    margin-bottom: -15%;
+    color: #495057;
+	font-size: 16px;
+	margin-left:auto;
+	margin-right:auto;
+	font-weight: bold;
+}
+
+/*pie chart*/
+#chart_wrap {
+    position: relative;
+    padding-bottom: 50%;
+    height: 0;
+    overflow:hidden;
+}
+
+#chart_div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+}
+
  
