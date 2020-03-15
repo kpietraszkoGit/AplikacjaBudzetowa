@@ -43,6 +43,7 @@
 	<link rel="stylesheet" href="cssFontello/fontello.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/portfel.png"> <!--ikonka w zakładce-->
 
 	<!--<script src="date.js"></script>-->
 	<!--[if lt IE 9]>
@@ -54,11 +55,9 @@
 
 	<header>
 		
-		<!-- <h1 class="logo">Personal Budget<i class="icon-money"></i></h1>-->
 		<div class="logo2">
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
-		<!--<p id="quotation">"Bądź oszczędnym, abyś mógł być szczodrym." – Aleksander Fredro</p>-->
 	</header>
 	
 	<main>
@@ -70,7 +69,6 @@
                 <div class="row">
 				
                     <div class="col-lg-3 register-left">
-                       <!-- <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>-->
 						<div id="icon"><i class="icon-money-1"></i></div>
                         <h3>Witaj w aplikacji Personal Budget</h3>
                         <p>Aplikacja pomoże Ci w prowadzeniu swojego własnego budżetu, wystarczy się tylko zarejestrować i zalogować.</p>
@@ -114,7 +112,7 @@
 	<footer>
 		
 		<div class="info">
-			Wszelkie prawa zastrzeżone &copy; 2019 Dziękuję za wizytę!
+			All rights reserved &copy; 2020, Personal Budget created by Kail
 		</div>
 	
 	</footer>

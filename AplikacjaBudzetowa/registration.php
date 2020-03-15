@@ -84,18 +84,6 @@
 					$allOK=false;
 					$_SESSION['e_email']="Istnieje już konto przypisane do tego adresu e-mail!";
 				}		
-
-				//Czy nick jest już zarezerwowany?
-				/*$result = $connection->query("SELECT id FROM users WHERE username='$nick'");
-				
-				if (!$result) throw new Exception($connection->error);
-				
-				$ile_takich_nickow = $result->num_rows;
-				if ($ile_takich_nickow>0)
-				{
-					$wszystko_OK=false;
-					$_SESSION['e_nick']="Istnieje już gracz o takim nicku! Wybierz inny.";
-				}*/
 				
 				if ($allOK==true)
 				{
@@ -112,17 +100,6 @@
 						$connection->query("INSERT INTO payment_methods_assigned_to_users (user_id, name) SELECT '$user_id', name FROM payment_methods_default");
 						
 						$_SESSION['successfulRegistration']=true;
-						//$connection->query("INSERT INTO incomes_category_assigned_to_users (user_id, name) VALUES ('$user_id', (SELECT name FROM incomes_category_default)");
-						
-						//$connection->query("INSERT INTO incomes_category_assigned_to_users (name) SELECT name FROM incomes_category_default");
-						
-						//dziala kopiuje mi dane tylko nie kopiuje mi jeszcze ID
-						//INSERT INTO incomes_category_assigned_to_users (name) SELECT name FROM incomes_category_default
-						
-						//$connection->query("INSERT INTO incomes_category_assigned_to_users (user_id) SELECT id FROM users");
-						
-						//działa dobrze kopiuje id
-						//$connection->query("INSERT INTO incomes_category_assigned_to_users (user_id) VALUES ('$user_id')");
 						
 						header('Location: welcome.php');
 					}
@@ -164,6 +141,7 @@
 	<link rel="stylesheet" href="cssFontello/fontello.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/portfel.png"> <!--ikonka w zakładce-->
 
 	<!--<script src="date.js"></script>-->
 	<!--[if lt IE 9]>
@@ -174,12 +152,10 @@
 <body>
 
 	<header>
-		
-		<!-- <h1 class="logo">Personal Budget<i class="icon-money"></i></h1>-->
+
 		<div class="logo2">
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
-		<!--<p id="quotation">"Bądź oszczędnym, abyś mógł być szczodrym." – Aleksander Fredro</p>-->
 	</header>
 	
 	<main>
@@ -191,7 +167,6 @@
                 <div class="row">
 				
                     <div class="col-lg-3 register-left">
-                       <!-- <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>-->
 						<div id="icon"><i class="icon-money-1"></i></div>
                         <h3>Witaj w aplikacji Personal Budget</h3>
                         <p>Aplikacja pomoże Ci w prowadzeniu swojego własnego budżetu, wystarczy się tylko zarejestrować i zalogować.</p>
@@ -206,109 +181,99 @@
                                 <a href="registration.php" class="nav-link active">Rejestracja</a>
                             </li>
                         </ul>
-						
-						<!--<div id="myTabContent">
+								
+						<form method="post">
+					
+							<h3 class="register-heading">Rejestracja użytkownika</h3>
 							
-								
-				
-							<div role="tabpanel">-->
-								
-									<form method="post">
-								
-										<h3 class="register-heading">Rejestracja użytkownika</h3>
-										
-										<div class="row register-form">
-										  
-											<div class="col-md-10 inputs offset-md-1">
+							<div class="row register-form">
+							  
+								<div class="col-md-10 inputs offset-md-1">
 
-												<div class="form-group col-md-9 mx-auto">
-													<div class="icons">
-														<i class='icon-user'></i>
-													</div>
-													<input id="imie" name="nick" type="text" class="form-control" placeholder="Imię *" value="<?php
-														if (isset($_SESSION['fr_nick']))
-														{
-															echo $_SESSION['fr_nick'];
-															unset($_SESSION['fr_nick']);
-														}
-													?>" />
-													<?php
-														if (isset($_SESSION['e_nick']))
-														{
-															echo '<div class="error">'.$_SESSION['e_nick'].'</div>';
-															unset($_SESSION['e_nick']);
-														}
-													?>
-												</div>     
-
-												<div class="form-group col-md-9 mx-auto">
-													<div class="icons">
-														<i class='icon-email'></i>
-													</div>
-													<input type="email" name="email" class="form-control" placeholder="Email *" value="<?php
-														if (isset($_SESSION['fr_email']))
-														{
-															echo $_SESSION['fr_email'];
-															unset($_SESSION['fr_email']);
-														}
-													?>" />
-													<?php
-														if (isset($_SESSION['e_email']))
-														{
-															echo '<div class="error">'.$_SESSION['e_email'].'</div>';
-															unset($_SESSION['e_email']);
-														}
-													?>
-												</div>
-												
-												<div class="form-group col-md-9 mx-auto">
-													<div class="icons">
-														<i class='icon-lock-filled'></i>
-													</div>
-													<input type="password" name="password1" class="form-control" placeholder="Hasło *"  value="<?php
-														if (isset($_SESSION['fr_password1']))
-														{
-															echo $_SESSION['fr_password1'];
-															unset($_SESSION['fr_password1']);
-														}
-													?>"/>
-													<?php
-														if (isset($_SESSION['e_password']))
-														{
-															echo '<div class="error">'.$_SESSION['e_password'].'</div>';
-															unset($_SESSION['e_password']);
-														}
-													?>
-												</div>
-												
-												<div class="form-group col-md-9 mx-auto">
-													<div class="icons">
-														<i class='icon-lock-filled'></i>
-													</div>
-													<input type="password" name="password2" class="form-control" placeholder="Powtórz hasło *" value="<?php
-														if (isset($_SESSION['fr_password2']))
-														{
-															echo $_SESSION['fr_password2'];
-															unset($_SESSION['fr_password2']);
-														}
-													?>"/>	
-												</div>
-												
-											</div>
-							
-											<div class="col-md-12">
-												
-												<input type="submit" class="btnRegister" value="Zarejestruj się"/>
-												
-											</div>
-											
+									<div class="form-group col-md-9 mx-auto">
+										<div class="icons">
+											<i class='icon-user'></i>
 										</div>
-										
-									</form>
+										<input id="imie" name="nick" type="text" class="form-control" placeholder="Imię *" value="<?php
+											if (isset($_SESSION['fr_nick']))
+											{
+												echo $_SESSION['fr_nick'];
+												unset($_SESSION['fr_nick']);
+											}
+										?>" />
+										<?php
+											if (isset($_SESSION['e_nick']))
+											{
+												echo '<div class="error">'.$_SESSION['e_nick'].'</div>';
+												unset($_SESSION['e_nick']);
+											}
+										?>
+									</div>     
+
+									<div class="form-group col-md-9 mx-auto">
+										<div class="icons">
+											<i class='icon-email'></i>
+										</div>
+										<input type="email" name="email" class="form-control" placeholder="Email *" value="<?php
+											if (isset($_SESSION['fr_email']))
+											{
+												echo $_SESSION['fr_email'];
+												unset($_SESSION['fr_email']);
+											}
+										?>" />
+										<?php
+											if (isset($_SESSION['e_email']))
+											{
+												echo '<div class="error">'.$_SESSION['e_email'].'</div>';
+												unset($_SESSION['e_email']);
+											}
+										?>
+									</div>
 									
-							<!--</div>
+									<div class="form-group col-md-9 mx-auto">
+										<div class="icons">
+											<i class='icon-lock-filled'></i>
+										</div>
+										<input type="password" name="password1" class="form-control" placeholder="Hasło *"  value="<?php
+											if (isset($_SESSION['fr_password1']))
+											{
+												echo $_SESSION['fr_password1'];
+												unset($_SESSION['fr_password1']);
+											}
+										?>"/>
+										<?php
+											if (isset($_SESSION['e_password']))
+											{
+												echo '<div class="error">'.$_SESSION['e_password'].'</div>';
+												unset($_SESSION['e_password']);
+											}
+										?>
+									</div>
+									
+									<div class="form-group col-md-9 mx-auto">
+										<div class="icons">
+											<i class='icon-lock-filled'></i>
+										</div>
+										<input type="password" name="password2" class="form-control" placeholder="Powtórz hasło *" value="<?php
+											if (isset($_SESSION['fr_password2']))
+											{
+												echo $_SESSION['fr_password2'];
+												unset($_SESSION['fr_password2']);
+											}
+										?>"/>	
+									</div>
+									
+								</div>
+				
+								<div class="col-md-12">
+									
+									<input type="submit" class="btnRegister" value="Zarejestruj się"/>
+									
+								</div>
+								
+							</div>
 							
-						</div>-->
+						</form>
 						
                     </div>
 					
@@ -323,7 +288,7 @@
 	<footer>
 		
 		<div class="info">
-			Wszelkie prawa zastrzeżone &copy; 2019 Dziękuję za wizytę!
+			All rights reserved &copy; 2020, Personal Budget created by Kail
 		</div>
 	
 	</footer>

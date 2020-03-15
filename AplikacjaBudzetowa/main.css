@@ -12,12 +12,10 @@ h1.logo
 {
 	font-size: 230%;
 	font-weight: 700;/*grubosc czcionki*/
-	/*color: #1c74b2;*/
 	color: #c2780a;
 	text-align: center;
 	letter-spacing: 5px;/*rozstrzelenie*/
 	margin-top: 5px;
-	/*margin-bottom: 10px;*/
 	text-shadow: black 0.1em 0.1em 0.2em;
 	font-family: 'Philosopher', sans-serif;
 }
@@ -33,13 +31,14 @@ h1.logo
 {
 	text-align: center;
 	margin: 10px;
-	font-size: 14px;
+	font-size: 10px;
 }
 
 .name
 {
 	font-size: 30px;
 }
+
 .welcome
 {
 	float: left;
@@ -55,10 +54,8 @@ h1.logo
 /*bootstrap*/
 .register
 {
-    /*background: -webkit-linear-gradient(left, #3931af, #00c6ff);/*gradient kolorowy niebieski do jasnego*/
 	background: -webkit-linear-gradient(left, #c2780a, #f9c831);/*gradient kolorowy niebieski do jasnego*/
     padding: 3%;
-	/*margin-top: 3%;*/
 	-webkit-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
 	-moz-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
 	box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
@@ -74,18 +71,7 @@ h1.logo
 	margin-top: auto;
 	margin-bottom: auto;
 }
-/*.register-left input{
-    border: none;
-    border-radius: 1.5rem;
-    padding: 2%;
-    width: 60%;
-    background: #f8f9fa;
-    font-weight: bold;
-    color: #383d41;
-    margin-top: 30%;
-    margin-bottom: 3%;
-    cursor: pointer;
-}*/
+
 .form-control
 {
 	margin-top: 10px;
@@ -99,19 +85,9 @@ h1.logo
     border-bottom-left-radius: 10% 50%;/*zawiniete boki*/
 	border-top-right-radius: 12px;
 	border-bottom-right-radius: 12px;
-	/*height: 425px;*/
 	height: 100%;
 	border: solid 1px #e0a32a;
 }
-/*.register-left img
-{
-    margin-top: 15%;
-    margin-bottom: 5%;
-    width: 25%;
-    -webkit-animation: mover 2s infinite  alternate;
-    animation: mover 1s infinite  alternate;
-}*/
-
 
 #icon
 {
@@ -142,10 +118,8 @@ h1.logo
 
 .register .register-form/*tutaj zmiana inputow ale mozna osobna klase do tego napisac*/
 {
-    /*padding: 10% 22%;*/
 	padding: 6%;
     margin-top: 12%;
-	/*background-color: blue;*/
 }
 
 .btnRegister
@@ -164,7 +138,6 @@ h1.logo
 
 .btnRegister:active, .btnRegister:focus
 {
-	/*border-style: none !important;*/
 	outline: none;
 }
 
@@ -195,7 +168,7 @@ h1.logo
 
 .register .nav-tabs .nav-link.active
 {
-    width: 110px;
+    width: 100%;/*110*/
     color: #e0bd00;
     border: 2px solid #e0bd00;
     border-top-left-radius: 1.5rem;
@@ -214,10 +187,22 @@ h1.logo
 {
 	.register-right
 	{
-		/*height: 335px;*/
 		height: 100%;
 		border-top-left-radius: 12px;/*zawiniete boki*/
 		border-bottom-left-radius: 12px;/*zawiniete boki*/
+	}
+	.register .nav-tabs .nav-link.active
+	{
+		width: 100%;/*110*/
+		/*font-size: 14px;*/
+		overflow:hidden;
+	}
+	.register .nav-tabs .nav-link
+	{
+		width: 100%;/*110*/
+		/*font-size: 14px;*/
+		overflow:hidden;
+		height: 100%;
 	}
 }
 
@@ -225,7 +210,6 @@ h1.logo
 {
 	.register-right
 	{
-		/*height: 375px;*/
 		height: 100%;
 	}
 }
@@ -235,15 +219,8 @@ h1.logo
 	height: 100%;
 }
 
-/*.inputs2
-{
-	height: 226px;
-}*/
-
 .form-control
 {
-	/*margin-left: auto;
-	margin-right: auto;*/
 }
 
 input[type=text]:focus,/*jesli pole zyskuje aktywnosc co ma sie stać-focus*/
@@ -261,7 +238,6 @@ input[type=date]:focus
 input[type=submit]:hover,
 input[type=reset]:hover
 {
-	/*background-color: #e8ab31;*/
 	opacity: 0.9;
 }
 
@@ -382,7 +358,6 @@ input[type=reset]:hover
 	border: solid 1px #e0a32a;
     border-radius: 1.5rem;
 	padding: 2%;
-    /*background: #e0a32a;*/
     color: #fff;
     font-weight: 600;
     width: 160px;
@@ -421,9 +396,7 @@ input[type=reset]:hover
 
 .register .registerBalance-form/*tutaj zmiana inputow ale mozna osobna klase do tego napisac*/
 {
-    /*padding: 10% 22%;*/
 	padding: 6%;
-	/*background-color: blue;*/
 }
 
 .register-headingBalance
@@ -433,7 +406,7 @@ input[type=reset]:hover
 }
 
 /* Dropdown Button */
-.dropbtn 
+.dropbtn
 {
 	width: 200px;
 	background-color: #edb23b;
@@ -441,8 +414,6 @@ input[type=reset]:hover
 	color: #fff;
 	padding: 4%;
 	border: solid 1px #bd7d1e;
-    /*border-top-right-radius: 1.5rem;
-	border-bottom-left-radius: 1.5rem;*/
 	border-radius: 1.5rem;
 	cursor: pointer;/*kursor zmienia sie na łapkę*/
 	font-weight: 600;
@@ -452,12 +423,8 @@ input[type=reset]:hover
 .dropbtn:hover, .dropbtn:focus
 {
 	background-color: #e0a32a;
-}
-
-.dropbtn:active, .dropbtn:focus
-{
 	outline: none;
-	border-bottom-right-radius: 0px;
+	color: #f8f9fa;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -469,56 +436,14 @@ input[type=reset]:hover
 	position: relative;	
 }
 
-/* Dropdown Content (Hidden by Default) */
 .dropdown-content 
 {
-  display: none;
-  position: absolute;
-  background-color: #e0a32a;
-  border-right: solid 2px #bd7d1e;
-  border-left: solid 2px #bd7d1e;
-  min-width: 170px;
-  z-index: 1;
-  border-bottom-left-radius: 1.5rem;
-  border-bottom-right-radius: 1.5rem;
-  margin-left: 30px;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a 
-{
-	 color: #f8f9fa;
-	 padding: 12px 20px;
-	 text-decoration: none;
-	 display: block;
-	 text-shadow: black 0.1em 0.1em 0.2em;
-	 border-bottom: solid 2px #bd7d1e;
-	 /*border-left: solid 2px #e0972a;
-	 border-right: solid 2px #e0972a;*/
-	 font-size: 14px;
-	 border-bottom-left-radius: 1.5rem;
-	 border-bottom-right-radius: 1.5rem;
-}
-
-.dropdown-content a:first-child
-{
-	/*border-top-left-radius: 1.5rem;
-	border-top-right-radius: 1.5rem;
-	border-top: solid 2px #e0972a;*/
-}
-
-.dropdown-content a:last-child
-{
-	border-bottom-left-radius: 1.5rem;
-	border-bottom-right-radius: 1.5rem;
-	border-bottom: solid 2px #e0972a;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover 
-{
-	color: #fffdcc;
-	background-color: #e8ab31;
+	border-radius: 12px;
+	border: solid 1px #e0a32a;
+	background-color: #ffffff;
+	color: #495057;
+	margin-left: 10px;
+	/*margin-top: -1px;*/
 }
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
@@ -578,7 +503,6 @@ table
 	font-weight: 700;
 	border: dotted 1px #e0a32a;
 	border-radius: 1.5rem;
-	/*background-color: #ffce85;*/
 	text-shadow: 2px 1px 1px #FFFFFF;
 }
 #sum2
@@ -590,7 +514,6 @@ table
 	font-weight: 700;
 	border: dotted 1px #e0a32a;
 	border-radius: 1.5rem;
-	/*background-color: #ffce85;*/
 	text-shadow: 2px 1px 1px #FFFFFF;
 }
 

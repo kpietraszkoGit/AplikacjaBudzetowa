@@ -11,13 +11,16 @@
 		exit();
 	}
 	
-	$dbhandle = new mysqli('localhost','root','','aplikacjabudzetowa');
-	echo $dbhandle->connect_error;
+	require_once "connect.php";
+	mysqli_report(MYSQLI_REPORT_STRICT);
+	$connection = new mysqli($host, $db_user, $db_password, $db_name);
+	echo $connection->connect_error;
 	
 	$user_id = $_SESSION['id'];
+
 	
-	$query = "SELECT user_id, SUM(amount), expense_category_assigned_to_user_id FROM expenses WHERE MONTH(date_of_expense) = MONTH(CURDATE()) AND YEAR(date_of_expense) = YEAR(CURDATE()) AND user_id='$user_id' GROUP BY  expense_category_assigned_to_user_id ORDER BY SUM(amount) DESC";
-	$res = $dbhandle->query($query);
+	$query = "SELECT user_id, SUM(amount), expense_category_assigned_to_user_id, (SELECT name FROM  expenses_category_assigned_to_users WHERE expenses_category_assigned_to_users.id=expenses. expense_category_assigned_to_user_id) AS nameCategory FROM expenses WHERE MONTH(date_of_expense) = MONTH(CURDATE()) AND YEAR(date_of_expense) = YEAR(CURDATE()) AND user_id='$user_id' GROUP BY nameCategory ORDER BY SUM(amount) DESC";
+	$res = $connection->query($query);
 ?>
 
 <!DOCTYPE html>
@@ -38,8 +41,10 @@
 	<link rel="stylesheet" href="cssFontello/fontello.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/portfel.png"> <!--ikonka w zakładce-->
 	
-	<script src="date.js"></script>
+	<script src="jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="date.js"></script>
 	
 	<!--wykres kolowy-->
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -48,13 +53,13 @@
 		google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['expense_category_assigned_to_user_id', 'amount'],
+          ['nameCategory', 'amount'],
           
           <?php 
 			//while($row=$res->fetch_assoc())
 			while($row = mysqli_fetch_array($res))
 			{
-				echo "['".$row['expense_category_assigned_to_user_id']."',".$row[ 'SUM(amount)']."],";
+				echo "['".$row['nameCategory']."',".$row[ 'SUM(amount)']."],";
 			}
 
           ?>
@@ -63,9 +68,6 @@
 
         var options = {
           title: 'WYDATKI Z BIEŻĄCEGO MIESIĄCA:',
-          //pieHole: 0.4,
-		  //backgroundColor: 'red',
-		  //chartArea:{width:'auto',height:'auto'},
 		  legend: {textStyle: {color: '#495057'}},
 		  titleTextStyle: {color: '#495057', fontName: 'Open Sans', fontSize: '16px'}
         };
@@ -97,8 +99,7 @@ $(window).on("throttledresize", function (event) {
 		<div class="logo2">
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
-		<!--<h1 class="logo">Personal Budget<i class="icon-money"></i></h1>-->
-		<!--<p id="quotation">"Bądź oszczędnym, abyś mógł być szczodrym." – Aleksander Fredro</p>-->
+
 		<nav class="navbar navbar-custom bg-gold navbar-expand-lg mb-4 mt-1 menu"><!--navbar-dark cimny kolor logo, bg-primary-kolor tła, navbar-expand-md- menu rozwijaj sie od widoku medium, lg-od dużego rozmiaru-->
 		
 			<a class="navbar-brand" href="#"></a><!--d-display, mr-1-margin right rozmiar 1, align-bottom- wyrównanie do dołu -->
@@ -169,11 +170,9 @@ $(window).on("throttledresize", function (event) {
                 <div class="row">
 				
                     <div class="col-lg-3 register-left">
-                       <!-- <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>-->
+
 						<div id="icon"><i class="icon-money-1"></i></div>
-                        <!--<div class="welcome col-md-12">Witaj</div>
-						<div id="name2" class="welcome col-md-12 mb-1">Kamil</div>-->
-						<!--<h3>Witaj Kamil</h3>-->
+
                         <p>Niektórzy ludzie są tak oszczędni, jakby mieli wiecznie żyć, inni tak rozrzutni, jakby mieli natychmiast umrzeć. <br> – Arystoteles –</p>
                     </div>
 					
@@ -190,7 +189,7 @@ $(window).on("throttledresize", function (event) {
 								
 								<div id="button" class="col-md-6 mb-4">
 			
-									<div class="dropdown">
+									<!--<div class="dropdown">
 									
 									  <button onclick="myFunction()" class="dropbtn">Wybierz okres<i class="icon-down-dir"></i></button>
 									  <div id="myDropdown" class="dropdown-content">
@@ -200,6 +199,18 @@ $(window).on("throttledresize", function (event) {
 										<a href="#" data-toggle="modal" data-target="#exampleModal">Niestandardowy</a>
 									  </div>
 									  
+									</div>-->
+									
+									<div class="dropdown">
+									  <button class="btn btn-warning dropbtn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Wybierz okres
+									  </button>
+									  <div class="dropdown-menu dropdown-content" aria-labelledby="dropdownMenuButton">
+										<a class="dropdown-item" href="monthlyBalance.php">Bieżący miesiąc</a>
+										<a class="dropdown-item" href="lastMonthlyBalance.php">Poprzedni miesiąc</a>
+										<a class="dropdown-item" href="yearBalance.php">Bieżący rok</a>
+										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">Niestandardowy</a>
+									  </div>
 									</div>
 								
 								</div>
@@ -225,25 +236,17 @@ $(window).on("throttledresize", function (event) {
 															}
 															else
 															{
-																//echo "id zalogowanego użytkownika:".$user_id = $_SESSION['id'];
 																$user_id = $_SESSION['id'];
-																if($result = $connection->query("SELECT user_id, SUM(amount), income_category_assigned_to_user_id FROM incomes WHERE MONTH(date_of_income) = MONTH(CURDATE()) AND YEAR(date_of_income) = YEAR(CURDATE()) AND user_id='$user_id' GROUP BY  income_category_assigned_to_user_id ORDER BY SUM(amount) DESC"))
+																
+																if($result = $connection->query("SELECT user_id, SUM(amount), income_category_assigned_to_user_id, (SELECT name FROM  incomes_category_assigned_to_users WHERE incomes_category_assigned_to_users.id=incomes. income_category_assigned_to_user_id) AS nameCategory FROM incomes WHERE MONTH(date_of_income) = MONTH(CURDATE()) AND YEAR(date_of_income) = YEAR(CURDATE()) AND user_id='$user_id' GROUP BY nameCategory  ORDER BY SUM(amount) DESC"))
 																{
-																//biezacy miesiac o tym samym id
-																//if($result = $connection->query("SELECT user_id, income_category_assigned_to_user_id, amount FROM incomes WHERE MONTH(date_of_income) = MONTH(CURDATE()) AND YEAR(date_of_income) = YEAR(CURDATE()) AND user_id='$user_id'"))
-																//{
-																	//suma wszystkich kategorii
-																	//$result = $connection->query("SELECT income_category_assigned_to_user_id, SUM(amount) FROM incomes GROUP BY  income_category_assigned_to_user_id ORDER BY SUM(amount) DESC");
 																	$sumIncomes = 0;
 																	while($row = mysqli_fetch_array($result))
 																	{ 
-																		echo "<tr><td>".$row['income_category_assigned_to_user_id']."</td><td>".$row[ 'SUM(amount)']."</td></tr>";
+																		echo "<tr><td>".$row['nameCategory']."</td><td>".$row[ 'SUM(amount)']."</td></tr>";
 																		$number = $row[ 'SUM(amount)'];
 																		$sumIncomes += $number;
 																	}
-																	//$_SESSION['sumIncomes'] = $sum;
-																	//echo $_SESSION['sumIncomes'] = $sum;
-																	//echo $sumIncomes;
 																}
 																else
 																{
@@ -284,24 +287,16 @@ $(window).on("throttledresize", function (event) {
 															}
 															else
 															{
-																//echo "id zalogowanego użytkownika:".$user_id = $_SESSION['id'];
 																$user_id = $_SESSION['id'];
-																if($result2 = $connection->query("SELECT user_id, SUM(amount), expense_category_assigned_to_user_id FROM expenses WHERE MONTH(date_of_expense) = MONTH(CURDATE()) AND YEAR(date_of_expense) = YEAR(CURDATE()) AND user_id='$user_id' GROUP BY  expense_category_assigned_to_user_id ORDER BY SUM(amount) DESC"))
+																if($result2 = $connection->query("SELECT user_id, SUM(amount), expense_category_assigned_to_user_id, (SELECT name FROM  expenses_category_assigned_to_users WHERE expenses_category_assigned_to_users.id=expenses. expense_category_assigned_to_user_id) AS nameCategory FROM expenses WHERE MONTH(date_of_expense) = MONTH(CURDATE()) AND YEAR(date_of_expense) = YEAR(CURDATE()) AND user_id='$user_id' GROUP BY nameCategory ORDER BY SUM(amount) DESC"))
 																{
-																//biezacy miesiac o tym samym id
-																//if($result = $connection->query("SELECT user_id, income_category_assigned_to_user_id, amount FROM incomes WHERE MONTH(date_of_income) = MONTH(CURDATE()) AND YEAR(date_of_income) = YEAR(CURDATE()) AND user_id='$user_id'"))
-																//{
-																	//suma wszystkich kategorii
-																	//$result = $connection->query("SELECT income_category_assigned_to_user_id, SUM(amount) FROM incomes GROUP BY  income_category_assigned_to_user_id ORDER BY SUM(amount) DESC");
 																	$sumExpenses = 0;
 																	while($row2 = mysqli_fetch_array($result2))
 																	{ 
-																		echo "<tr><td>".$row2['expense_category_assigned_to_user_id']."</td><td>".$row2[ 'SUM(amount)']."</td></tr>";
-																		$nameExpense = $row2['expense_category_assigned_to_user_id'];
+																		echo "<tr><td>".$row2['nameCategory']."</td><td>".$row2[ 'SUM(amount)']."</td></tr>";
 																		$numberExpense = $row2[ 'SUM(amount)'];
 																		$sumExpenses += $numberExpense;
 																	}
-																	//echo $sumExpenses;
 																}
 																else
 																{
@@ -401,7 +396,7 @@ $(window).on("throttledresize", function (event) {
 	<footer>
 		
 		<div class="info">
-			Wszelkie prawa zastrzeżone &copy; 2019 Dziękuję za wizytę!
+			All rights reserved &copy; 2020, Personal Budget created by Kail
 		</div>
 	
 	</footer>

@@ -1,7 +1,8 @@
 <?php
 
-	session_start();//zeby tablica session działała,globalny pojemnik na dane	
+	session_start();//zeby tablica session działała,globalny pojemnik na dane
 	
+	if (isset($_SESSION['ok'])) unset($_SESSION['ok']);//kasowanie informacji o dodaniu przychodu
 	if (isset($_SESSION['ok2'])) unset($_SESSION['ok2']);
 	
 	if (!isset($_SESSION['logged']))//jesli zmienna nie bedzie ustawiona, czyli zalogowani nie bedziemy
@@ -10,48 +11,14 @@
 		exit();
 	}
 	
-	if (isset($_POST['amount']))
-	{
-		$user_id = $_SESSION['id'];
-		$amount = $_POST['amount'];
-		$day = $_POST['day'];
-		$category = $_POST['category'];
-		$comment = $_POST['comment'];
-
-		require_once "connect.php";
-		mysqli_report(MYSQLI_REPORT_STRICT);
-			
-			try 
-			{
-				$connection = new mysqli($host, $db_user, $db_password, $db_name);
-				if ($connection->connect_errno!=0)
-				{
-					throw new Exception(mysqli_connect_errno());
-				}
-				else
-				{
-					if($connection->query("INSERT INTO incomes (id, user_id, amount, date_of_income, income_comment,  income_category_assigned_to_user_id) SELECT NULL, '$user_id', '$amount', '$day', '$comment', id FROM incomes_category_assigned_to_users WHERE name='$category' AND user_id='$user_id'"))
-				
-					{
-						$_SESSION['ok'] = '<span>Przychód został dodany!</span>';
-					}
-					else
-					{
-						throw new Exception($connection->error);
-					}
-					
-					$connection->close();
-				}
-			}
-			catch(Exception $e)
-			{
-				echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogodności!</span>';
-				echo '<br />Informacja developerska: '.$e;
-			}
+	$dbhandle = new mysqli('localhost','root','','aplikacjabudzetowa');
+	echo $dbhandle->connect_error;
 	
-	}
+	$user_id = $_SESSION['id'];
+	
+	$query = "SELECT user_id, SUM(amount), expense_category_assigned_to_user_id FROM expenses WHERE YEAR(date_of_expense) = YEAR(CURDATE()) AND user_id='$user_id' GROUP BY  expense_category_assigned_to_user_id ORDER BY SUM(amount) DESC";
+	$res = $dbhandle->query($query);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pl">
@@ -71,22 +38,55 @@
 	<link rel="stylesheet" href="cssFontello/fontello.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
-	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/portfel.png"> <!--ikonka w zakładce-->
 	
-	<script src="date.js"></script>
 	<!--[if lt IE 9]>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<![endif]-->
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['id', 'amount'],
+          
+          <?php 
+			//while($row=$res->fetch_assoc())
+			while($row = mysqli_fetch_array($res))
+			{
+				echo "['".$row['expense_category_assigned_to_user_id']."',".$row[ 'SUM(amount)']."],";
+			}
+
+          ?>
+
+        ]);
+
+        var options = {
+          title: 'Wydatki',
+         // is3D:true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+	
+
 </head>
 
-<body onload="today();">
+<body>
 
 	<header>
-	
+		
 		<div class="logo2">
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
 
+		<!--<h1 class="logo">Personal Budget<i class="icon-money"></i></h1>-->
+		<!--<p id="quotation">"Bądź oszczędnym, abyś mógł być szczodrym." – Aleksander Fredro</p>-->
 		<nav class="navbar navbar-custom bg-gold navbar-expand-lg mb-4 mt-1 menu"><!--navbar-dark cimny kolor logo, bg-primary-kolor tła, navbar-expand-md- menu rozwijaj sie od widoku medium, lg-od dużego rozmiaru-->
 		
 			<a class="navbar-brand" href="#"></a><!--d-display, mr-1-margin right rozmiar 1, align-bottom- wyrównanie do dołu -->
@@ -99,17 +99,34 @@
 				
 				<ul class="navbar-nav mx-auto"><!--mr-auto-margin automatyczny-->
 				
-					<li class="nav-item"><!--trzeba pisać takie klasy, active-wyróżniona zakładka w menu-->
+					<li class="nav-item active"><!--trzeba pisać takie klasy, active-wyróżniona zakładka w menu-->
 						<a class="nav-link" href="mainPage.php"><i class="icon-home"></i> Strona Główna </a>
 					</li>
 					
-					<li class="nav-item active">
+					<li class="nav-item">
 						<a class="nav-link" href="addIncome.php"><i class="icon-dollar"></i> Dodaj Przychód </a>
 					</li>
 					
 					<li class="nav-item">
 						<a class="nav-link" href="addExpense.php"><i class="icon-bag"></i> Dodaj Wydatek </a>
 					</li>
+					
+					<!--<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false" id="submenu" aria-haspopup="true"><i class="icon-home"></i> Przeglądaj Bilans </a>
+						
+						<div class="dropdown-menu" aria-labelledby="submenu">
+						
+							<a class="dropdown-item" href="#"> Bieżący miesiąc </a>
+							<a class="dropdown-item" href="#"> Poprzedni miesiąc </a>
+							
+							<div class="dropdown-divider"></div>
+							
+							<a class="dropdown-item" href="#"> Bieżący rok </a>
+							<a class="dropdown-item" href="#"> Niestandardowy </a>
+						
+						</div>
+						
+					</li>-->
 					
 					<li class="nav-item">
 						<a class="nav-link" href="monthlyBalance.php"><i class="icon-chart-bar"></i> Przeglądaj Bilans </a>
@@ -138,82 +155,32 @@
 			<div class="container register">
 			
                 <div class="row">
-				
+
                     <div class="col-lg-3 register-left">
-
+                       <!-- <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>-->
 						<div id="icon"><i class="icon-money-1"></i></div>
-
-                        <p>"Oszczędność jest to umiejętność unikania zbędnych wydatków." <br> – Seneka Młodszy –</p>
+						<div class="welcome col-md-12">Witaj</div>
+						<?php
+							echo "<div id='name2' class='welcome col-md-12 mb-1'>".$_SESSION['username']."</div>";
+						?>	
+                        <p>W menu głównym możesz wybrać opcje dodania przychodu i wydatku oraz przeglądać swój bilans finansowy z różnego okresu.</p>
                     </div>
-
+					
                     <div class="col-lg-9 register-right">
-                        		
+                        
+						
                         <div class="tab-content" id="myTabContent">
 						
-							<form method="post">
-							
-                                <h3 class="register-heading2">Wprowadź dane przychodu:</h3>
+                         
+                                <h3 class="register-heading">Logowanie powiodło się!</h3>
 								
-                                <div class="row register-form">
+                                <div class="row description-form">
+								
+                                 <p class="description">Pierwszy krok do planowania swojego domowego budżetu wykonany. Co chcesz teraz zrobić?</p>
+								 
+								 <img src="img/mysliciel.png" alt="money" class="img-fluid" />
 									
-										<div class="col-md-10 inputs offset-md-1">
-										
-											<div class="form-group col-md-9 mx-auto">
-												<div class="icons">
-													<i class='icon-pencil'></i>
-												</div>
-												<input type="number"  class="form-control" name="amount" step="0.01" placeholder="Kwota *" value="" required />
-											</div>     
-											
-											<div class="form-group col-md-9 mx-auto">
-												<div class="icons">
-													<i class='icon-calendar'></i>
-												</div>
-												<input type="date" id="days" class="form-control" name="day" value="" min="1900-01-01" max="2500-01-01" required />
-											</div>
-											
-											<div class="form-group col-md-9 mx-auto">
-												<div class="icons">
-													<i class='icon-list-bullet'></i>
-												</div>
-												<select class="form-control category" name="category">
-												
-													<option value="zero" selected disabled>Kategorie przychodu *</option>
-													<option value="Wynagrodzenie">Wynagrodzenie</option>
-													<option value="Odsetki bankowe">Odsetki bankowe</option>
-													<option value="Allegro">Sprzedaż na allegro</option>
-													<option value="Inne">Inne...</option>
-												
-												</select>
-											</div>
-											
-											<div class="form-group col-md-9 mx-auto">
-												<div class="icons">
-													<i class='icon-pencil'></i>
-												</div>
-												<input type="text" class="form-control" placeholder="Komentarz *" name="comment" value="" />
-											</div>
-												
-										</div>
-										
-										<?php
-												if(isset($_SESSION['ok']))
-												{	
-													 echo "<div id='name2' class='add'>".$_SESSION['ok']."</div>";
-												}
-											?>
-								
-										<div class="col-md-12 buttons">
-										
-											<input type="submit" class="btn-success btnRegister2"  value="Dodaj"/>
-											
-											<input type="reset" class="btn-danger btnRegister2"  value="Anuluj"/>
-										
-										</div>
-
                                 </div>
-								
-							</form>
 							
                         </div>
 						
@@ -230,10 +197,11 @@
 	<footer>
 		
 		<div class="info">
-			All rights reserved &copy; 2020, Personal Budget created by Kail
+			Wszelkie prawa zastrzeżone &copy; 2019 Dziękuję za wizytę!
 		</div>
-	
-	</footer>
+		<!--wykres-->
+	<div id="piechart" style="width: 900px; height: 500px;"></div>
+	</footer>	
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	

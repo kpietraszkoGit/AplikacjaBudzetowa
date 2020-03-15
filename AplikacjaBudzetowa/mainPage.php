@@ -30,6 +30,7 @@
 	<link rel="stylesheet" href="cssFontello/fontello.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/portfel.png"> <!--ikonka w zakładce-->
 	
 	<!--[if lt IE 9]>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -47,8 +48,6 @@
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
 		
-		<!--<h1 class="logo">Personal Budget<i class="icon-money"></i></h1>-->
-		<!--<p id="quotation">"Bądź oszczędnym, abyś mógł być szczodrym." – Aleksander Fredro</p>-->
 		<nav class="navbar navbar-custom bg-gold navbar-expand-lg mb-4 mt-1 menu"><!--navbar-dark cimny kolor logo, bg-primary-kolor tła, navbar-expand-md- menu rozwijaj sie od widoku medium, lg-od dużego rozmiaru-->
 		
 			<a class="navbar-brand" href="#"></a><!--d-display, mr-1-margin right rozmiar 1, align-bottom- wyrównanie do dołu -->
@@ -72,23 +71,6 @@
 					<li class="nav-item">
 						<a class="nav-link" href="addExpense.php"><i class="icon-bag"></i> Dodaj Wydatek </a>
 					</li>
-					
-					<!--<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false" id="submenu" aria-haspopup="true"><i class="icon-home"></i> Przeglądaj Bilans </a>
-						
-						<div class="dropdown-menu" aria-labelledby="submenu">
-						
-							<a class="dropdown-item" href="#"> Bieżący miesiąc </a>
-							<a class="dropdown-item" href="#"> Poprzedni miesiąc </a>
-							
-							<div class="dropdown-divider"></div>
-							
-							<a class="dropdown-item" href="#"> Bieżący rok </a>
-							<a class="dropdown-item" href="#"> Niestandardowy </a>
-						
-						</div>
-						
-					</li>-->
 					
 					<li class="nav-item">
 						<a class="nav-link" href="monthlyBalance.php"><i class="icon-chart-bar"></i> Przeglądaj Bilans </a>
@@ -119,13 +101,12 @@
                 <div class="row">
 
                     <div class="col-lg-3 register-left">
-                       <!-- <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>-->
 						<div id="icon"><i class="icon-money-1"></i></div>
 						<div class="welcome col-md-12">Witaj</div>
 						<?php
-							echo "<div id='name2' class='welcome col-md-12 mb-1'>".$_SESSION['username']."</div>";
+							echo "<div id='name2' class='welcome col-md-12 mb-1'>".$_SESSION['username']."</div>"
 						?>	
-                        <p>W menu głównym możesz wybrać opcje dodania przychodu i wydatku oraz przeglądać swój bilans finansowy z różnego okresu.</p>
+                        <div class="col-md-12 mb-4">W menu głównym możesz wybrać opcje dodania przychodu i wydatku oraz przeglądać swój bilans finansowy z różnego okresu.</div>
                     </div>
 					
                     <div class="col-lg-9 register-right">
@@ -159,7 +140,7 @@
 	<footer>
 		
 		<div class="info">
-			Wszelkie prawa zastrzeżone &copy; 2019 Dziękuję za wizytę!
+			All rights reserved &copy; 2020, Personal Budget created by Kail
 		</div>
 	
 	</footer>	

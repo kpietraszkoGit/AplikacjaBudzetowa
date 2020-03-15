@@ -18,7 +18,7 @@
 		$pay= $_POST['pay'];
 		$category = $_POST['category'];
 		$comment = $_POST['comment'];
-		
+		//echo "id.'$user_id'";
 
 		require_once "connect.php";
 		mysqli_report(MYSQLI_REPORT_STRICT);
@@ -32,7 +32,7 @@
 				}
 				else
 				{
-					if($connection->query("INSERT INTO expenses VALUES (NULL, '$user_id', '$category ', '$pay ', '$amount', '$day', '$comment')"))
+					if($connection->query("INSERT INTO expenses (id, user_id, amount, date_of_expense, expense_comment,  expense_category_assigned_to_user_id, payment_method_assigned_to_user_id) VALUES (NULL, '$user_id', '$amount', '$day', '$comment', (SELECT id FROM expenses_category_assigned_to_users WHERE name='$category' AND user_id='$user_id'), (SELECT id FROM payment_methods_assigned_to_users WHERE name='$pay' AND user_id='$user_id'))"))
 					{
 						$_SESSION['ok2'] = '<span>Wydatek został dodany!</span>';
 					}
@@ -71,6 +71,7 @@
 	<link rel="stylesheet" href="cssFontello/fontello.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/portfel.png"> <!--ikonka w zakładce-->
 	
 	<script src="date.js"></script>
 	<!--[if lt IE 9]>
@@ -85,8 +86,7 @@
 		<div class="logo2">
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
-		<!--<h1 class="logo">Personal Budget<i class="icon-money"></i></h1>-->
-		<!--<p id="quotation">"Bądź oszczędnym, abyś mógł być szczodrym." – Aleksander Fredro</p>-->
+
 		<nav class="navbar navbar-custom bg-gold navbar-expand-lg mb-4 mt-1 menu"><!--navbar-dark cimny kolor logo, bg-primary-kolor tła, navbar-expand-md- menu rozwijaj sie od widoku medium, lg-od dużego rozmiaru-->
 		
 			<a class="navbar-brand" href="#"></a><!--d-display, mr-1-margin right rozmiar 1, align-bottom- wyrównanie do dołu -->
@@ -157,11 +157,9 @@
                 <div class="row">
 				
                     <div class="col-lg-3 register-left">
-                       <!-- <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>-->
+
 						<div id="icon"><i class="icon-money-1"></i></div>
-                        <!--<div class="welcome col-md-12">Witaj</div>
-						<div id="name2" class="welcome col-md-12 mb-1">Kamil</div>-->
-						<!--<h3>Witaj Kamil</h3>-->
+
                         <p> "Sposoby wzbogacania się są liczne. Oszczędzanie jest jednym z najlepszych." <br> – Francis Bacon –</p>
                     </div>
 					
@@ -199,9 +197,9 @@
 											<select class="form-control category" name="pay">
 											
 												<option value="0" selected disabled>Sposób płatności *</option>
-												<option value="1">Gotówka</option>
-												<option value="2">Karta debetowa</option>
-												<option value="3">Karta kredytowa</option>
+												<option value="Gotówka">Gotówka</option>
+												<option value="Karta debetowa">Karta debetowa</option>
+												<option value="Karta kredytowa">Karta kredytowa</option>
 											
 											</select>
                                         </div>
@@ -213,22 +211,22 @@
 											<select class="form-control category" name="category">
 											
 												<option value="0" selected disabled>Kategorie wydatku *</option>
-												<option value="1">Transport</option>
-												<option value="2">Książki</option>
-												<option value="3">Jedzenie</option>
-												<option value="4">Mieszkanie</option>
-												<option value="5">Telekomunikacja</option>
-												<option value="6">Opieka zdrowotna</option>
-												<option value="7">Ubranie</option>
-												<option value="8">Higiena</option>
-												<option value="9">Dzieci</option>
-												<option value="10">Rozrywka</option>
-												<option value="11">Wycieczka</option>
-												<option value="12">Oszczędności</option>
-												<option value="13">Na emeryture</option>
-												<option value="14">Spłata długów</option>
-												<option value="15">Darowizna</option>
-												<option value="16">Inne...</option>
+												<option value="Transport">Transport</option>
+												<option value="Książki">Książki</option>
+												<option value="Jedzenie">Jedzenie</option>
+												<option value="Mieszkanie">Mieszkanie</option>
+												<option value="Telekomunikacja">Telekomunikacja</option>
+												<option value="Opieka zdrowotna">Opieka zdrowotna</option>
+												<option value="Ubranie">Ubranie</option>
+												<option value="Higiena">Higiena</option>
+												<option value="Dzieci">Dzieci</option>
+												<option value="Rozrywka">Rozrywka</option>
+												<option value="Wycieczka">Wycieczka</option>
+												<option value="Oszczędności">Oszczędności</option>
+												<option value="Na emeryture">Na emeryture</option>
+												<option value="Spłata długów">Spłata długów</option>
+												<option value="Darowizna">Darowizna</option>
+												<option value="Inne">Inne...</option>
 											
 											</select>
                                         </div>
@@ -257,14 +255,6 @@
 										<input type="reset" class="btn-danger btnRegister2"  value="Anuluj"/>
 									
 									</div>
-										
-									<!--</div>
-									
-									<div class="col-sm-6 buttons">
-										
-										<input type="submit" class="btn-success btnRegister2"  value="Dodaj"/>
-										
-									</div>-->
 
                                 </div>
 								
@@ -285,7 +275,7 @@
 	<footer>
 		
 		<div class="info">
-			Wszelkie prawa zastrzeżone &copy; 2019 Dziękuję za wizytę!
+			All rights reserved &copy; 2020, Personal Budget created by Kail
 		</div>
 	
 	</footer>

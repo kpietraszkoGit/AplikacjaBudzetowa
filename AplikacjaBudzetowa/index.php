@@ -27,6 +27,7 @@
 	<link rel="stylesheet" href="cssFontello/fontello.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/portfel.png"> <!--ikonka w zakładce-->
 
 	<!--<script src="date.js"></script>-->
 	<!--[if lt IE 9]>
@@ -38,11 +39,9 @@
 
 	<header>
 		
-		<!-- <h1 class="logo">Personal Budget<i class="icon-money"></i></h1>-->
 		<div class="logo2">
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
-		<!--<p id="quotation">"Bądź oszczędnym, abyś mógł być szczodrym." – Aleksander Fredro</p>-->
 	</header>
 	
 	<main>
@@ -54,14 +53,14 @@
                 <div class="row">
 				
                     <div class="col-lg-3 register-left">
-                       <!-- <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>-->
 						<div id="icon"><i class="icon-money-1"></i></div>
                         <h3>Witaj w aplikacji Personal Budget</h3>
                         <p>Aplikacja pomoże Ci w prowadzeniu swojego własnego budżetu, wystarczy się tylko zarejestrować i zalogować.</p>
                     </div>
 					
                     <div class="col-lg-9 register-right">
-                        <ul class="nav nav-tabs nav-justified">
+
+                       <ul class="nav nav-tabs nav-justified">
                             <li class="nav-item">
                                 <a href="index.php" class="nav-link active">Logowanie</a>
                             </li>
@@ -70,55 +69,45 @@
                             </li>
                         </ul>
 						
-						<!--<div id="myTabContent">-->
+						<form action="login.php" method="post">
+
+							<h3  class="register-heading">Logowanie użytkownika</h3>
 							
-								<!--<div role="tabpanel">-->
-									
-									<form action="login.php" method="post">
-									
-										<h3  class="register-heading">Logowanie użytkownika</h3>
-										
-										<div class="row register-form">
-										
-											<div class="col-md-10 inputs offset-md-1">
-											
-												<div class="form-group col-md-9 mx-auto">
-													<div class="icons">
-														<i class='icon-email'></i>
-													</div>
-													<input type="email" class="form-control" placeholder="Email *" value="" name="login"/>
-												</div>
-												
-												<div class="form-group col-md-9 mx-auto">
-													<div class="icons">
-														<i class='icon-lock-filled'></i>
-													</div>
-													<input type="password" class="form-control" placeholder="Hasło *" value="" name="password"/>
-												</div>
-											
-											<?php
-												if(isset($_SESSION['error']))
-												{	
-													 echo "<div id='name2' class='error'>".$_SESSION['error']."</div>";
-												}
-											?>
-											</div>
-					
-										   <div class="col-md-12">
-												
-												<input type="submit" class="btnRegister" value="Zaloguj się"/>
-												
-											</div>
-											
+							<div class="row register-form">
+							
+								<div class="col-md-10 inputs offset-md-1">
+								
+									<div class="form-group col-md-9 mx-auto">
+										<div class="icons">
+											<i class='icon-email'></i>
 										</div>
-										
-									</form>
-						
-								<!--</div>-->
-				
-						
+										<input type="email" class="form-control" placeholder="Email *" value="" name="login"/>
+									</div>
+									
+									<div class="form-group col-md-9 mx-auto">
+										<div class="icons">
+											<i class='icon-lock-filled'></i>
+										</div>
+										<input type="password" class="form-control" placeholder="Hasło *" value="" name="password"/>
+									</div>
+								
+								<?php
+									if(isset($_SESSION['error']))
+									{	
+										 echo "<div id='name2' class='error'>".$_SESSION['error']."</div>";
+									}
+								?>
+								</div>
+		
+							   <div class="col-md-12">
+									
+									<input type="submit" class="btnRegister" value="Zaloguj się"/>
+									
+								</div>
+								
+							</div>
 							
-						<!--</div>-->
+						</form>
 						
                     </div>
 					
@@ -133,7 +122,7 @@
 	<footer>
 		
 		<div class="info">
-			Wszelkie prawa zastrzeżone &copy; 2019 Dziękuję za wizytę!
+			All rights reserved &copy; 2020, Personal Budget created by Kail
 		</div>
 	
 	</footer>

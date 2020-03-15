@@ -22,8 +22,7 @@
 		$password = $_POST['password'];
 		
 		$login = htmlentities($login, ENT_QUOTES, "UTF-8");
-		//$password = htmlentities($password, ENT_QUOTES, "UTF-8");
-		//sprintf("SELECT * FROM users WHERE email='%s' AND password='%s'",
+
 		if ($result = @$connection->query(
 		sprintf("SELECT * FROM users WHERE email='%s'",
 		mysqli_real_escape_string($connection,$login))))
