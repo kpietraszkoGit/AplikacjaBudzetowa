@@ -1,10 +1,10 @@
 <?php
 
-	session_start();//zeby tablica session działała,globalny pojemnik na dane	
+	session_start();
 	
 	if (isset($_SESSION['ok2'])) unset($_SESSION['ok2']);
 	
-	if (!isset($_SESSION['logged']))//jesli zmienna nie bedzie ustawiona, czyli zalogowani nie bedziemy
+	if (!isset($_SESSION['logged']))
 	{
 		header('Location: index.php');
 		exit();
@@ -87,19 +87,19 @@
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
 
-		<nav class="navbar navbar-custom bg-gold navbar-expand-lg mb-4 mt-1 menu"><!--navbar-dark cimny kolor logo, bg-primary-kolor tła, navbar-expand-md- menu rozwijaj sie od widoku medium, lg-od dużego rozmiaru-->
+		<nav class="navbar navbar-custom bg-gold navbar-expand-lg mb-4 mt-1 menu">
 		
-			<a class="navbar-brand" href="#"></a><!--d-display, mr-1-margin right rozmiar 1, align-bottom- wyrównanie do dołu -->
+			<a class="navbar-brand" href="#"></a>
 			
 			<button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Przełącznik nawigacji">
 				<span class="navbar-toggler-icon"><i class="icon-menu"></i></span>
 			</button>
 		
-			<div class="collapse navbar-collapse" id="mainmenu"><!--zapadniecie się menu, schowanie się-->
+			<div class="collapse navbar-collapse" id="mainmenu">
 				
-				<ul class="navbar-nav mx-auto"><!--mr-auto-margin automatyczny-->
+				<ul class="navbar-nav mx-auto">
 				
-					<li class="nav-item"><!--trzeba pisać takie klasy, active-wyróżniona zakładka w menu-->
+					<li class="nav-item">
 						<a class="nav-link" href="mainPage.php"><i class="icon-home"></i> Strona Główna </a>
 					</li>
 					
@@ -116,7 +116,7 @@
 					</li>
 					
 					<li class="nav-item">
-						<a class="nav-link" href="#"><i class="icon-cog"></i> Ustawienia </a><!--disabled-opcja wyszarzona, nieaktywna-->
+						<a class="nav-link" href="#"><i class="icon-cog"></i> Ustawienia </a>
 					</li>
 					
 					<li class="nav-item">
@@ -240,7 +240,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	
 	<script src="js/bootstrap.min.js"></script>
-	<script src="jquery-3.2.1.min.js"></script><!--musi byc powyżej pliku,js-->
+	<script src="jquery-3.2.1.min.js"></script>
 	
 </body>
 </html>

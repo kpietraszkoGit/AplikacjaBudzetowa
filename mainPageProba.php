@@ -20,10 +20,10 @@ $res = $dbhandle->query($query);
           ['Country', 'Visits'],
           
           <?php 
-while($row=$res->fetch_assoc())
-{
-    echo "['".$row['Country']."',".$row['sum(Visits)']."],";
-}
+			while($row=$res->fetch_assoc())
+			{
+				echo "['".$row['Country']."',".$row['sum(Visits)']."],";
+			}
 
           ?>
 

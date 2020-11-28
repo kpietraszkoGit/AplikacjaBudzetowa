@@ -52,7 +52,7 @@
                 <div class="row">
 				
                     <div class="col-lg-3 register-left">
-			<div id="icon"><i class="icon-money-1"></i></div>
+						<div id="icon"><i class="icon-money-1"></i></div>
                         <h3>Witaj w aplikacji Personal Budget</h3>
                         <p>Aplikacja pomoże Ci w prowadzeniu swojego własnego budżetu, wystarczy się tylko zarejestrować i zalogować.</p>
                     </div>
@@ -68,45 +68,45 @@
                             </li>
                         </ul>
 						
-			<form action="login.php" method="post">
+						<form action="login.php" method="post">
 
-				<h3  class="register-heading">Logowanie użytkownika</h3>
+							<h3  class="register-heading">Logowanie użytkownika</h3>
 
-				<div class="row register-form">
+							<div class="row register-form">
 
-					<div class="col-md-10 inputs offset-md-1">
+								<div class="col-md-10 inputs offset-md-1">
 
-						<div class="form-group col-md-9 mx-auto">
-							<div class="icons">
-								<i class='icon-email'></i>
+									<div class="form-group col-md-9 mx-auto">
+										<div class="icons">
+											<i class='icon-email'></i>
+										</div>
+										<input type="email" class="form-control" placeholder="Email *" value="" name="login"/>
+									</div>
+
+									<div class="form-group col-md-9 mx-auto">
+										<div class="icons">
+											<i class='icon-lock-filled'></i>
+										</div>
+										<input type="password" class="form-control" placeholder="Hasło *" value="" name="password"/>
+									</div>
+
+								<?php
+									if(isset($_SESSION['error']))
+									{	
+										 echo "<div id='name2' class='error'>".$_SESSION['error']."</div>";
+									}
+								?>
+								</div>
+
+							   <div class="col-md-12">
+
+									<input type="submit" class="btnRegister" value="Zaloguj się"/>
+
+								</div>
+
 							</div>
-							<input type="email" class="form-control" placeholder="Email *" value="" name="login"/>
-						</div>
 
-						<div class="form-group col-md-9 mx-auto">
-							<div class="icons">
-								<i class='icon-lock-filled'></i>
-							</div>
-							<input type="password" class="form-control" placeholder="Hasło *" value="" name="password"/>
-						</div>
-
-					<?php
-						if(isset($_SESSION['error']))
-						{	
-							 echo "<div id='name2' class='error'>".$_SESSION['error']."</div>";
-						}
-					?>
-					</div>
-
-				   <div class="col-md-12">
-
-						<input type="submit" class="btnRegister" value="Zaloguj się"/>
-
-					</div>
-
-				</div>
-
-			</form>
+						</form>
 						
                     </div>
 					

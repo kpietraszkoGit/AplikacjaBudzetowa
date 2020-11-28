@@ -1,11 +1,11 @@
 <?php
 
-	session_start();//zeby tablica session działała,globalny pojemnik na dane
+	session_start();
 	
-	if (isset($_SESSION['ok'])) unset($_SESSION['ok']);//kasowanie informacji o dodaniu przychodu
+	if (isset($_SESSION['ok'])) unset($_SESSION['ok']);
 	if (isset($_SESSION['ok2'])) unset($_SESSION['ok2']);
 	
-	if (!isset($_SESSION['logged']))//jesli zmienna nie bedzie ustawiona, czyli zalogowani nie bedziemy
+	if (!isset($_SESSION['logged']))
 	{
 		header('Location: index.php');
 		exit();
@@ -40,7 +40,7 @@
 	<link rel="stylesheet" href="cssFontello/fontello.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
-	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/portfel.png"> <!--ikonka w zakładce-->
+	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/portfel.png">
 	
 	<script src="jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="date.js"></script>
@@ -49,7 +49,7 @@
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
-		google.setOnLoadCallback(drawChart);
+	  google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['nameCategory', 'amount'],
@@ -69,19 +69,19 @@
 		  titleTextStyle: {color: '#495057', fontName: 'Open Sans', fontSize: '16px'}
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-  chart.draw(data, options);
-}
+		var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+		chart.draw(data, options);
+	  }
 
-$(window).on("throttledresize", function (event) {
-    var options = {
-        width: '100%',
-        height: '100%'
-    };
+	  $(window).on("throttledresize", function (event) {
+		var options = {
+			width: '100%',
+			height: '100%'
+		};
 
-    var data = google.visualization.arrayToDataTable([]);
-    drawChart(data, options);
-});
+		var data = google.visualization.arrayToDataTable([]);
+		drawChart(data, options);
+	  });
     </script>
 	<!--[if lt IE 9]>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -96,19 +96,19 @@ $(window).on("throttledresize", function (event) {
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
 
-		<nav class="navbar navbar-custom bg-gold navbar-expand-lg mb-4 mt-1 menu"><!--navbar-dark cimny kolor logo, bg-primary-kolor tła, navbar-expand-md- menu rozwijaj sie od widoku medium, lg-od dużego rozmiaru-->
+		<nav class="navbar navbar-custom bg-gold navbar-expand-lg mb-4 mt-1 menu">
 		
-			<a class="navbar-brand" href="#"></a><!--d-display, mr-1-margin right rozmiar 1, align-bottom- wyrównanie do dołu -->
+			<a class="navbar-brand" href="#"></a>
 			
 			<button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Przełącznik nawigacji">
 				<span class="navbar-toggler-icon"><i class="icon-menu"></i></span>
 			</button>
 		
-			<div class="collapse navbar-collapse" id="mainmenu"><!--zapadniecie się menu, schowanie się-->
+			<div class="collapse navbar-collapse" id="mainmenu">
 				
-				<ul class="navbar-nav mx-auto"><!--mr-auto-margin automatyczny-->
+				<ul class="navbar-nav mx-auto">
 				
-					<li class="nav-item"><!--trzeba pisać takie klasy, active-wyróżniona zakładka w menu-->
+					<li class="nav-item">
 						<a class="nav-link" href="mainPage.php"><i class="icon-home"></i> Strona Główna </a>
 					</li>
 					
@@ -185,11 +185,11 @@ $(window).on("throttledresize", function (event) {
 								<div class="col-md-5 balance">
 									<p class="titleBox">Przychody</p>
 													
-									<table cellpadding="10" cellspacing="0"><!--wypisanie danych w tabeli -->
+									<table cellpadding="10" cellspacing="0">
 										<thead>
 											<tr><th>Kategorie</th><th>Przychód</th></tr>
 										</thead>
-										<tbody><!--wypisanie danych w tabeli , foreach-dla kazdego-petla//wyjmowanie rekord po rekordzie as-jako $user-bufor-->
+										<tbody>
 											<?php
 													require_once "connect.php";
 													mysqli_report(MYSQLI_REPORT_STRICT);
@@ -235,11 +235,11 @@ $(window).on("throttledresize", function (event) {
 								<div class="col-md-5 ml-md-1 balance">
 									<p class="titleBox">Wydatki</p>
 									
-									<table cellpadding="10" cellspacing="0"><!--wypisanie danych w tabeli -->
+									<table cellpadding="10" cellspacing="0">
 										<thead>
 											<tr><th>Kategorie</th><th>Wydatek</th></tr>
 										</thead>
-										<tbody><!--wypisanie danych w tabeli , foreach-dla kazdego-petla//wyjmowanie rekord po rekordzie as-jako $user-bufor-->
+										<tbody>
 											<?php
 													require_once "connect.php";
 													mysqli_report(MYSQLI_REPORT_STRICT);
@@ -372,7 +372,7 @@ $(window).on("throttledresize", function (event) {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	
 	<script src="js/bootstrap.min.js"></script>
-	<script src="jquery-3.2.1.min.js"></script><!--musi byc powyżej pliku,js-->
+	<script src="jquery-3.2.1.min.js"></script>
 	
 </body>
 </html>

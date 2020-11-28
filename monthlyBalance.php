@@ -1,11 +1,11 @@
 <?php
 
-	session_start();//zeby tablica session działała,globalny pojemnik na dane
+	session_start();
 	
-	if (isset($_SESSION['ok'])) unset($_SESSION['ok']);//kasowanie informacji o dodaniu przychodu
+	if (isset($_SESSION['ok'])) unset($_SESSION['ok']);
 	if (isset($_SESSION['ok2'])) unset($_SESSION['ok2']);
 	
-	if (!isset($_SESSION['logged']))//jesli zmienna nie bedzie ustawiona, czyli zalogowani nie bedziemy
+	if (!isset($_SESSION['logged']))
 	{
 		header('Location: index.php');
 		exit();
@@ -50,7 +50,7 @@
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
-		google.setOnLoadCallback(drawChart);
+	  google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['nameCategory', 'amount'],
@@ -73,18 +73,18 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-  chart.draw(data, options);
-}
+        chart.draw(data, options);
+      }
 
-$(window).on("throttledresize", function (event) {
-    var options = {
-        width: '100%',
-        height: '100%'
-    };
+	  $(window).on("throttledresize", function (event) {
+		var options = {
+			width: '100%',
+			height: '100%'
+		};
 
-    var data = google.visualization.arrayToDataTable([]);
-    drawChart(data, options);
-});
+		var data = google.visualization.arrayToDataTable([]);
+		drawChart(data, options);
+	  });
     </script>
 	
 	<!--[if lt IE 9]>
@@ -100,19 +100,19 @@ $(window).on("throttledresize", function (event) {
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
 
-		<nav class="navbar navbar-custom bg-gold navbar-expand-lg mb-4 mt-1 menu"><!--navbar-dark cimny kolor logo, bg-primary-kolor tła, navbar-expand-md- menu rozwijaj sie od widoku medium, lg-od dużego rozmiaru-->
+		<nav class="navbar navbar-custom bg-gold navbar-expand-lg mb-4 mt-1 menu">
 		
-			<a class="navbar-brand" href="#"></a><!--d-display, mr-1-margin right rozmiar 1, align-bottom- wyrównanie do dołu -->
+			<a class="navbar-brand" href="#"></a>
 			
 			<button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Przełącznik nawigacji">
 				<span class="navbar-toggler-icon"><i class="icon-menu"></i></span>
 			</button>
 		
-			<div class="collapse navbar-collapse" id="mainmenu"><!--zapadniecie się menu, schowanie się-->
+			<div class="collapse navbar-collapse" id="mainmenu">
 				
-				<ul class="navbar-nav mx-auto"><!--mr-auto-margin automatyczny-->
+				<ul class="navbar-nav mx-auto">
 				
-					<li class="nav-item"><!--trzeba pisać takie klasy, active-wyróżniona zakładka w menu-->
+					<li class="nav-item">
 						<a class="nav-link" href="mainPage.php"><i class="icon-home"></i> Strona Główna </a>
 					</li>
 					
@@ -123,24 +123,7 @@ $(window).on("throttledresize", function (event) {
 					<li class="nav-item">
 						<a class="nav-link" href="addExpense.php"><i class="icon-bag"></i> Dodaj Wydatek </a>
 					</li>
-					
-					<!--<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false" id="submenu" aria-haspopup="true"><i class="icon-home"></i> Przeglądaj Bilans </a>
-						
-						<div class="dropdown-menu" aria-labelledby="submenu">
-						
-							<a class="dropdown-item" href="#"> Bieżący miesiąc </a>
-							<a class="dropdown-item" href="#"> Poprzedni miesiąc </a>
-							
-							<div class="dropdown-divider"></div>
-							
-							<a class="dropdown-item" href="#"> Bieżący rok </a>
-							<a class="dropdown-item" href="#"> Niestandardowy </a>
-						
-						</div>
-						
-					</li>-->
-					
+
 					<li class="nav-item active">
 						<a class="nav-link" href="monthlyBalance.php"><i class="icon-chart-bar"></i> Przeglądaj Bilans </a>
 					</li>
@@ -188,18 +171,6 @@ $(window).on("throttledresize", function (event) {
 								</div>
 								
 								<div id="button" class="col-md-6 mb-4">
-			
-									<!--<div class="dropdown">
-									
-									  <button onclick="myFunction()" class="dropbtn">Wybierz okres<i class="icon-down-dir"></i></button>
-									  <div id="myDropdown" class="dropdown-content">
-										<a href="monthlyBalance.php">Bieżący miesiąc</a>
-										<a href="lastMonthlyBalance.php">Poprzedni miesiąc</a>
-										<a href="yearBalance.php">Bieżący rok</a>
-										<a href="#" data-toggle="modal" data-target="#exampleModal">Niestandardowy</a>
-									  </div>
-									  
-									</div>-->
 									
 									<div class="dropdown">
 									  <button class="btn btn-warning dropbtn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -218,11 +189,11 @@ $(window).on("throttledresize", function (event) {
 								<div class="col-md-5 balance">
 									<p class="titleBox">Przychody</p>
 													
-									<table cellpadding="10" cellspacing="0"><!--wypisanie danych w tabeli -->
+									<table cellpadding="10" cellspacing="0">
 										<thead>
 											<tr><th>Kategorie</th><th>Przychód</th></tr>
 										</thead>
-										<tbody><!--wypisanie danych w tabeli , foreach-dla kazdego-petla//wyjmowanie rekord po rekordzie as-jako $user-bufor-->
+										<tbody>
 											<?php
 													require_once "connect.php";
 													mysqli_report(MYSQLI_REPORT_STRICT);
@@ -269,11 +240,11 @@ $(window).on("throttledresize", function (event) {
 								<div class="col-md-5 ml-md-1 balance">
 									<p class="titleBox">Wydatki</p>
 									
-									<table cellpadding="10" cellspacing="0"><!--wypisanie danych w tabeli -->
+									<table cellpadding="10" cellspacing="0">
 										<thead>
 											<tr><th>Kategorie</th><th>Wydatek</th></tr>
 										</thead>
-										<tbody><!--wypisanie danych w tabeli , foreach-dla kazdego-petla//wyjmowanie rekord po rekordzie as-jako $user-bufor-->
+										<tbody>
 											<?php
 													require_once "connect.php";
 													mysqli_report(MYSQLI_REPORT_STRICT);
@@ -406,7 +377,7 @@ $(window).on("throttledresize", function (event) {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	
 	<script src="js/bootstrap.min.js"></script>
-	<script src="jquery-3.2.1.min.js"></script><!--musi byc powyżej pliku,js-->
+	<script src="jquery-3.2.1.min.js"></script>
 	
 </body>
 </html>

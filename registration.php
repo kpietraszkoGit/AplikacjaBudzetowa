@@ -1,13 +1,12 @@
 <?php
 
-	session_start();//zeby tablica session działała,globalny pojemnik na dane
+	session_start();
 	
 	//////////////////rejestracja///////////////////////////
 	if (isset($_SESSION['error'])) unset($_SESSION['error']);
 	
 	if (isset($_POST['email']))
 	{
-		//Udana walidacja? Załóżmy, że tak!
 		$allOK=true;
 		
 		//Sprawdź poprawność nickname'a
@@ -54,8 +53,6 @@
 
 		$password_hash = password_hash($password1, PASSWORD_DEFAULT);
 			
-		
-		//Zapamiętaj wprowadzone dane
 		$_SESSION['fr_nick'] = $nick;
 		$_SESSION['fr_email'] = $email;
 		$_SESSION['fr_password1'] = $password1;
@@ -73,7 +70,6 @@
 			}
 			else
 			{
-				//Czy email już istnieje?
 				$result = $connection->query("SELECT id FROM users WHERE email='$email'");
 				
 				if (!$result) throw new Exception($connection->error);
@@ -87,11 +83,10 @@
 				
 				if ($allOK==true)
 				{
-					//Hurra, wszystkie testy zaliczone, dodajemy gracza do bazy
 					if ($connection->query("INSERT INTO users VALUES (NULL, '$nick', '$password_hash', '$email')"))
 					{
 						$_SESSION['successfulRegistration']=true;
-						$user_id = $connection->insert_id;//pobieranie id po rejestracji
+						$user_id = $connection->insert_id;
 						
 						$connection->query("INSERT INTO incomes_category_assigned_to_users (user_id, name) SELECT '$user_id', name FROM incomes_category_default");
 						
@@ -106,8 +101,7 @@
 					else
 					{
 						throw new Exception($connection->error);
-					}
-					
+					}				
 				}
 				
 				$connection->close();
@@ -141,9 +135,8 @@
 	<link rel="stylesheet" href="cssFontello/fontello.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
-	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/portfel.png"> <!--ikonka w zakładce-->
+	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/portfel.png">
 
-	<!--<script src="date.js"></script>-->
 	<!--[if lt IE 9]>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<![endif]-->
@@ -298,7 +291,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	
 	<script src="js/bootstrap.min.js"></script>
-	<script src="jquery-3.2.1.min.js"></script><!--musi byc powyżej pliku,js-->
+	<script src="jquery-3.2.1.min.js"></script>
 	
 </body>
 </html>

@@ -11,14 +11,12 @@
 	{
 		unset($_SESSION['successfulRegistration']);
 	}
-	
-	//Usuwanie zmiennych pamiętających wartości wpisane do formularza
+
 	if (isset($_SESSION['fr_nick'])) unset($_SESSION['fr_nick']);
 	if (isset($_SESSION['fr_email'])) unset($_SESSION['fr_email']);
 	if (isset($_SESSION['fr_password1'])) unset($_SESSION['fr_password1']);
 	if (isset($_SESSION['fr_password2'])) unset($_SESSION['fr_password2']);
-	
-	//Usuwanie błędów rejestracji
+
 	if (isset($_SESSION['e_nick'])) unset($_SESSION['e_nick']);
 	if (isset($_SESSION['e_email'])) unset($_SESSION['e_email']);
 	if (isset($_SESSION['e_password'])) unset($_SESSION['e_password']);
@@ -122,7 +120,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	
 	<script src="js/bootstrap.min.js"></script>
-	<script src="jquery-3.2.1.min.js"></script><!--musi byc powyżej pliku,js-->
+	<script src="jquery-3.2.1.min.js"></script>
 	
 </body>
 </html>

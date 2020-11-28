@@ -1,11 +1,11 @@
 <?php
 
-	session_start();//zeby tablica session działała,globalny pojemnik na dane
+	session_start();
 	
-	if (isset($_SESSION['ok'])) unset($_SESSION['ok']);//kasowanie informacji o dodaniu przychodu
+	if (isset($_SESSION['ok'])) unset($_SESSION['ok']);
 	if (isset($_SESSION['ok2'])) unset($_SESSION['ok2']);
 	
-	if (!isset($_SESSION['logged']))//jesli zmienna nie bedzie ustawiona, czyli zalogowani nie bedziemy
+	if (!isset($_SESSION['logged']))
 	{
 		header('Location: index.php');
 		exit();
@@ -53,7 +53,7 @@
           ['id', 'amount'],
           
           <?php 
-			//while($row=$res->fetch_assoc())
+
 			while($row = mysqli_fetch_array($res))
 			{
 				echo "['".$row['expense_category_assigned_to_user_id']."',".$row[ 'SUM(amount)']."],";
@@ -85,21 +85,19 @@
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
 
-		<!--<h1 class="logo">Personal Budget<i class="icon-money"></i></h1>-->
-		<!--<p id="quotation">"Bądź oszczędnym, abyś mógł być szczodrym." – Aleksander Fredro</p>-->
-		<nav class="navbar navbar-custom bg-gold navbar-expand-lg mb-4 mt-1 menu"><!--navbar-dark cimny kolor logo, bg-primary-kolor tła, navbar-expand-md- menu rozwijaj sie od widoku medium, lg-od dużego rozmiaru-->
+		<nav class="navbar navbar-custom bg-gold navbar-expand-lg mb-4 mt-1 menu">
 		
-			<a class="navbar-brand" href="#"></a><!--d-display, mr-1-margin right rozmiar 1, align-bottom- wyrównanie do dołu -->
+			<a class="navbar-brand" href="#"></a>
 			
 			<button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Przełącznik nawigacji">
 				<span class="navbar-toggler-icon"><i class="icon-menu"></i></span>
 			</button>
 		
-			<div class="collapse navbar-collapse" id="mainmenu"><!--zapadniecie się menu, schowanie się-->
+			<div class="collapse navbar-collapse" id="mainmenu">
 				
-				<ul class="navbar-nav mx-auto"><!--mr-auto-margin automatyczny-->
+				<ul class="navbar-nav mx-auto">
 				
-					<li class="nav-item active"><!--trzeba pisać takie klasy, active-wyróżniona zakładka w menu-->
+					<li class="nav-item active">
 						<a class="nav-link" href="mainPage.php"><i class="icon-home"></i> Strona Główna </a>
 					</li>
 					
@@ -111,29 +109,12 @@
 						<a class="nav-link" href="addExpense.php"><i class="icon-bag"></i> Dodaj Wydatek </a>
 					</li>
 					
-					<!--<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false" id="submenu" aria-haspopup="true"><i class="icon-home"></i> Przeglądaj Bilans </a>
-						
-						<div class="dropdown-menu" aria-labelledby="submenu">
-						
-							<a class="dropdown-item" href="#"> Bieżący miesiąc </a>
-							<a class="dropdown-item" href="#"> Poprzedni miesiąc </a>
-							
-							<div class="dropdown-divider"></div>
-							
-							<a class="dropdown-item" href="#"> Bieżący rok </a>
-							<a class="dropdown-item" href="#"> Niestandardowy </a>
-						
-						</div>
-						
-					</li>-->
-					
 					<li class="nav-item">
 						<a class="nav-link" href="monthlyBalance.php"><i class="icon-chart-bar"></i> Przeglądaj Bilans </a>
 					</li>
 					
 					<li class="nav-item">
-						<a class="nav-link" href="#"><i class="icon-cog"></i> Ustawienia </a><!--disabled-opcja wyszarzona, nieaktywna-->
+						<a class="nav-link" href="#"><i class="icon-cog"></i> Ustawienia </a>
 					</li>
 					
 					<li class="nav-item">
@@ -157,7 +138,6 @@
                 <div class="row">
 
                     <div class="col-lg-3 register-left">
-                       <!-- <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>-->
 						<div id="icon"><i class="icon-money-1"></i></div>
 						<div class="welcome col-md-12">Witaj</div>
 						<?php
@@ -166,8 +146,7 @@
                         <p>W menu głównym możesz wybrać opcje dodania przychodu i wydatku oraz przeglądać swój bilans finansowy z różnego okresu.</p>
                     </div>
 					
-                    <div class="col-lg-9 register-right">
-                        
+                    <div class="col-lg-9 register-right">                      
 						
                         <div class="tab-content" id="myTabContent">
 						
@@ -200,7 +179,7 @@
 			Wszelkie prawa zastrzeżone &copy; 2019 Dziękuję za wizytę!
 		</div>
 		<!--wykres-->
-	<div id="piechart" style="width: 900px; height: 500px;"></div>
+		<div id="piechart" style="width: 900px; height: 500px;"></div>
 	</footer>	
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -208,7 +187,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	
 	<script src="js/bootstrap.min.js"></script>
-	<script src="jquery-3.2.1.min.js"></script><!--musi byc powyżej pliku,js-->
+	<script src="jquery-3.2.1.min.js"></script>
 	
 </body>
 </html>

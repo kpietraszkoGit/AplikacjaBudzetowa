@@ -11,10 +11,10 @@ body
 h1.logo
 {
 	font-size: 230%;
-	font-weight: 700;/*grubosc czcionki*/
+	font-weight: 700;
 	color: #c2780a;
 	text-align: center;
-	letter-spacing: 5px;/*rozstrzelenie*/
+	letter-spacing: 5px;
 	margin-top: 5px;
 	text-shadow: black 0.1em 0.1em 0.2em;
 	font-family: 'Philosopher', sans-serif;
@@ -54,7 +54,7 @@ h1.logo
 /*bootstrap*/
 .register
 {
-	background: -webkit-linear-gradient(left, #c2780a, #f9c831);/*gradient kolorowy niebieski do jasnego*/
+	background: -webkit-linear-gradient(left, #c2780a, #f9c831);
     padding: 3%;
 	-webkit-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
 	-moz-box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.75);
@@ -81,8 +81,8 @@ h1.logo
 .register-right
 {
     background: #f8f9fa;
-    border-top-left-radius: 10% 50%;/*zawiniete boki*/
-    border-bottom-left-radius: 10% 50%;/*zawiniete boki*/
+    border-top-left-radius: 10% 50%;
+    border-bottom-left-radius: 10% 50%;
 	border-top-right-radius: 12px;
 	border-bottom-right-radius: 12px;
 	height: 100%;
@@ -116,7 +116,7 @@ h1.logo
     margin-top: -9%;
 }
 
-.register .register-form/*tutaj zmiana inputow ale mozna osobna klase do tego napisac*/
+.register .register-form
 {
 	padding: 6%;
     margin-top: 12%;
@@ -168,7 +168,7 @@ h1.logo
 
 .register .nav-tabs .nav-link.active
 {
-    width: 100%;/*110*/
+    width: 100%;
     color: #e0bd00;
     border: 2px solid #e0bd00;
     border-top-left-radius: 1.5rem;
@@ -183,30 +183,28 @@ h1.logo
     color: #495057;
 }
 
-@media (max-width: 767px) /* do szerokości 575 px bedziemy mieć stylizacje jak poniżej*/
+@media (max-width: 767px)
 {
 	.register-right
 	{
 		height: 100%;
-		border-top-left-radius: 12px;/*zawiniete boki*/
-		border-bottom-left-radius: 12px;/*zawiniete boki*/
+		border-top-left-radius: 12px;
+		border-bottom-left-radius: 12px;
 	}
 	.register .nav-tabs .nav-link.active
 	{
-		width: 100%;/*110*/
-		/*font-size: 14px;*/
+		width: 100%;
 		overflow:hidden;
 	}
 	.register .nav-tabs .nav-link
 	{
-		width: 100%;/*110*/
-		/*font-size: 14px;*/
+		width: 100%;
 		overflow:hidden;
 		height: 100%;
 	}
 }
 
-@media (min-width: 768px) and (max-width: 1199px) /* do szerokości 575 px bedziemy mieć stylizacje jak poniżej*/
+@media (min-width: 768px) and (max-width: 1199px)
 {
 	.register-right
 	{
@@ -223,7 +221,7 @@ h1.logo
 {
 }
 
-input[type=text]:focus,/*jesli pole zyskuje aktywnosc co ma sie stać-focus*/
+input[type=text]:focus,
 input[type=email]:focus,
 input[type=password]:focus,
 input[type=number]:focus,
@@ -253,7 +251,7 @@ input[type=reset]:hover
     color: #495057;
 }
 
-.description-form/*tutaj zmiana inputow ale mozna osobna klase do tego napisac*/
+.description-form
 {
 	padding: 8%;
     margin-top: 12%;
@@ -269,7 +267,7 @@ input[type=reset]:hover
 
 .bg-gold
 {
-	background: -webkit-linear-gradient(left, #c2780a, #f9c831) !important;/*bez zmienny kolor, najważniejszy*/
+	background: -webkit-linear-gradient(left, #c2780a, #f9c831) !important;
 }
 
 .navbar-custom .navbar-nav .nav-link 
@@ -310,7 +308,7 @@ input[type=reset]:hover
 	color: #fffdcc;
 }
 
-.navbar-toggler:focus, .navbar-toggler:active /*wylaczenie obramowanie*/
+.navbar-toggler:focus, .navbar-toggler:active
 {
     outline: none;
     box-shadow: none;
@@ -326,7 +324,7 @@ input[type=reset]:hover
 	border: 2px solid #e0a32a;
 }
 
-.category option /*srodek select*/
+.category option
 {
 	background-color: #e0a32a;
 }
@@ -394,7 +392,7 @@ input[type=reset]:hover
 	color: #495057;
 }
 
-.register .registerBalance-form/*tutaj zmiana inputow ale mozna osobna klase do tego napisac*/
+.register .registerBalance-form
 {
 	padding: 6%;
 }
@@ -415,7 +413,7 @@ input[type=reset]:hover
 	padding: 4%;
 	border: solid 1px #bd7d1e;
 	border-radius: 1.5rem;
-	cursor: pointer;/*kursor zmienia sie na łapkę*/
+	cursor: pointer;
 	font-weight: 600;
 } 
 
@@ -443,10 +441,8 @@ input[type=reset]:hover
 	background-color: #ffffff;
 	color: #495057;
 	margin-left: 10px;
-	/*margin-top: -1px;*/
 }
 
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show 
 {
 	display: block;
@@ -497,7 +493,7 @@ table
 #sum
 {
 	font-size: 22px;
-	color: #e04e2a;/*jak bedzie dobrze to zielnoy kolor*/
+	color: #e04e2a;
 	text-align: center;
 	margin: 3%;
 	font-weight: 700;
@@ -508,7 +504,7 @@ table
 #sum2
 {
 	font-size: 22px;
-	color: green;/*jak bedzie dobrze to zielnoy kolor*/
+	color: green;
 	text-align: center;
 	margin: 3%;
 	font-weight: 700;
