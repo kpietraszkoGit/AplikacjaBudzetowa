@@ -1,11 +1,11 @@
 <?php
 
-	session_start();//zeby tablica session działała,globalny pojemnik na dane
+	session_start();
 	
 	if ((isset($_SESSION['logged'])) && ($_SESSION['logged']==true))
 	{
-		header('Location: mainPage.php');//jeśli zmienna zalogowany jest na true to przekieruj do gra.php
-		exit();//musi być zeby wyjsc z tego pliku
+		header('Location: mainPage.php');
+		exit();
 	}
 ?>
 
@@ -27,9 +27,8 @@
 	<link rel="stylesheet" href="cssFontello/fontello.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
-	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/portfel.png"> <!--ikonka w zakładce-->
+	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/portfel.png">
 
-	<!--<script src="date.js"></script>-->
 	<!--[if lt IE 9]>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<![endif]-->
@@ -53,7 +52,7 @@
                 <div class="row">
 				
                     <div class="col-lg-3 register-left">
-						<div id="icon"><i class="icon-money-1"></i></div>
+			<div id="icon"><i class="icon-money-1"></i></div>
                         <h3>Witaj w aplikacji Personal Budget</h3>
                         <p>Aplikacja pomoże Ci w prowadzeniu swojego własnego budżetu, wystarczy się tylko zarejestrować i zalogować.</p>
                     </div>
@@ -69,45 +68,45 @@
                             </li>
                         </ul>
 						
-						<form action="login.php" method="post">
+			<form action="login.php" method="post">
 
-							<h3  class="register-heading">Logowanie użytkownika</h3>
-							
-							<div class="row register-form">
-							
-								<div class="col-md-10 inputs offset-md-1">
-								
-									<div class="form-group col-md-9 mx-auto">
-										<div class="icons">
-											<i class='icon-email'></i>
-										</div>
-										<input type="email" class="form-control" placeholder="Email *" value="" name="login"/>
-									</div>
-									
-									<div class="form-group col-md-9 mx-auto">
-										<div class="icons">
-											<i class='icon-lock-filled'></i>
-										</div>
-										<input type="password" class="form-control" placeholder="Hasło *" value="" name="password"/>
-									</div>
-								
-								<?php
-									if(isset($_SESSION['error']))
-									{	
-										 echo "<div id='name2' class='error'>".$_SESSION['error']."</div>";
-									}
-								?>
-								</div>
-		
-							   <div class="col-md-12">
-									
-									<input type="submit" class="btnRegister" value="Zaloguj się"/>
-									
-								</div>
-								
+				<h3  class="register-heading">Logowanie użytkownika</h3>
+
+				<div class="row register-form">
+
+					<div class="col-md-10 inputs offset-md-1">
+
+						<div class="form-group col-md-9 mx-auto">
+							<div class="icons">
+								<i class='icon-email'></i>
 							</div>
-							
-						</form>
+							<input type="email" class="form-control" placeholder="Email *" value="" name="login"/>
+						</div>
+
+						<div class="form-group col-md-9 mx-auto">
+							<div class="icons">
+								<i class='icon-lock-filled'></i>
+							</div>
+							<input type="password" class="form-control" placeholder="Hasło *" value="" name="password"/>
+						</div>
+
+					<?php
+						if(isset($_SESSION['error']))
+						{	
+							 echo "<div id='name2' class='error'>".$_SESSION['error']."</div>";
+						}
+					?>
+					</div>
+
+				   <div class="col-md-12">
+
+						<input type="submit" class="btnRegister" value="Zaloguj się"/>
+
+					</div>
+
+				</div>
+
+			</form>
 						
                     </div>
 					
@@ -115,7 +114,7 @@
 
             </div>							
 				
-		</section>
+	</section>
 		
 	</main>
 	
@@ -132,7 +131,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	
 	<script src="js/bootstrap.min.js"></script>
-	<script src="jquery-3.2.1.min.js"></script><!--musi byc powyżej pliku,js-->
+	<script src="jquery-3.2.1.min.js"></script>
 	
 </body>
 </html>
