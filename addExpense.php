@@ -22,32 +22,32 @@
 		require_once "connect.php";
 		mysqli_report(MYSQLI_REPORT_STRICT);
 			
-			try 
+		try 
+		{
+			$connection = new mysqli($host, $db_user, $db_password, $db_name);
+			if ($connection->connect_errno!=0)
 			{
-				$connection = new mysqli($host, $db_user, $db_password, $db_name);
-				if ($connection->connect_errno!=0)
+				throw new Exception(mysqli_connect_errno());
+			}
+			else
+			{
+				if($connection->query("INSERT INTO expenses (id, user_id, amount, date_of_expense, expense_comment,  expense_category_assigned_to_user_id, payment_method_assigned_to_user_id) VALUES (NULL, '$user_id', '$amount', '$day', '$comment', (SELECT id FROM expenses_category_assigned_to_users WHERE name='$category' AND user_id='$user_id'), (SELECT id FROM payment_methods_assigned_to_users WHERE name='$pay' AND user_id='$user_id'))"))
 				{
-					throw new Exception(mysqli_connect_errno());
+					$_SESSION['ok2'] = '<span>Wydatek został dodany!</span>';
 				}
 				else
 				{
-					if($connection->query("INSERT INTO expenses (id, user_id, amount, date_of_expense, expense_comment,  expense_category_assigned_to_user_id, payment_method_assigned_to_user_id) VALUES (NULL, '$user_id', '$amount', '$day', '$comment', (SELECT id FROM expenses_category_assigned_to_users WHERE name='$category' AND user_id='$user_id'), (SELECT id FROM payment_methods_assigned_to_users WHERE name='$pay' AND user_id='$user_id'))"))
-					{
-						$_SESSION['ok2'] = '<span>Wydatek został dodany!</span>';
-					}
-					else
-					{
-						throw new Exception($connection->error);
-					}
-					
-					$connection->close();
+					throw new Exception($connection->error);
 				}
+
+				$connection->close();
 			}
-			catch(Exception $e)
-			{
-				echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogodności!</span>';
-				echo '<br />Informacja developerska: '.$e;
-			}
+		}
+		catch(Exception $e)
+		{
+			echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogodności!</span>';
+			echo '<br />Informacja developerska: '.$e;
+		}
 	
 	}
 ?>
@@ -140,8 +140,7 @@
 				
                     <div class="col-lg-3 register-left">
 
-						<div id="icon"><i class="icon-money-1"></i></div>
-
+		    <div id="icon"><i class="icon-money-1"></i></div>
                         <p> "Sposoby wzbogacania się są liczne. Oszczędzanie jest jednym z najlepszych." <br> – Francis Bacon –</p>
                     </div>
 					
@@ -149,7 +148,7 @@
                         						
                         <div class="tab-content" id="myTabContent">
 						
-							<form method="post">
+				<form method="post">
 							
                                 <h3 class="register-heading2">Wprowadź dane wydatku:</h3>
 								
@@ -158,88 +157,88 @@
                                     <div class="col-md-10 inputs offset-md-1">
 
                                         <div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-pencil'></i>
-											</div>
-											<input type="number"  class="form-control" name="amount" step="0.01" placeholder="Kwota *" value="" required />
+						<div class="icons">
+							<i class='icon-pencil'></i>
+						</div>
+						<input type="number"  class="form-control" name="amount" step="0.01" placeholder="Kwota *" value="" required />
                                         </div>     
 										
-										<div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-calendar'></i>
-											</div>
-											<input type="date" id="days"  class="form-control" name="day" value="" min="1900-01-01" max="2500-01-01" required />
+					<div class="form-group col-md-9 mx-auto">
+						<div class="icons">
+						<i class='icon-calendar'></i>
+						</div>
+						<input type="date" id="days"  class="form-control" name="day" value="" min="1900-01-01" max="2500-01-01" required />
                                         </div>
 										
-										<div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-wallet'></i>
-											</div>
-											<select class="form-control category" name="pay">
-											
-												<option value="0" selected disabled>Sposób płatności *</option>
-												<option value="Gotówka">Gotówka</option>
-												<option value="Karta debetowa">Karta debetowa</option>
-												<option value="Karta kredytowa">Karta kredytowa</option>
-											
-											</select>
+						<div class="form-group col-md-9 mx-auto">
+							<div class="icons">
+								<i class='icon-wallet'></i>
+						</div>
+						<select class="form-control category" name="pay">
+
+							<option value="0" selected disabled>Sposób płatności *</option>
+							<option value="Gotówka">Gotówka</option>
+							<option value="Karta debetowa">Karta debetowa</option>
+							<option value="Karta kredytowa">Karta kredytowa</option>
+
+						</select>
                                         </div>
 										
                                         <div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-list-bullet'></i>
-											</div>
-											<select class="form-control category" name="category">
-											
-												<option value="0" selected disabled>Kategorie wydatku *</option>
-												<option value="Transport">Transport</option>
-												<option value="Książki">Książki</option>
-												<option value="Jedzenie">Jedzenie</option>
-												<option value="Mieszkanie">Mieszkanie</option>
-												<option value="Telekomunikacja">Telekomunikacja</option>
-												<option value="Opieka zdrowotna">Opieka zdrowotna</option>
-												<option value="Ubranie">Ubranie</option>
-												<option value="Higiena">Higiena</option>
-												<option value="Dzieci">Dzieci</option>
-												<option value="Rozrywka">Rozrywka</option>
-												<option value="Wycieczka">Wycieczka</option>
-												<option value="Oszczędności">Oszczędności</option>
-												<option value="Na emeryture">Na emeryture</option>
-												<option value="Spłata długów">Spłata długów</option>
-												<option value="Darowizna">Darowizna</option>
-												<option value="Inne">Inne...</option>
-											
-											</select>
+						<div class="icons">
+							<i class='icon-list-bullet'></i>
+						</div>
+						<select class="form-control category" name="category">
+
+							<option value="0" selected disabled>Kategorie wydatku *</option>
+							<option value="Transport">Transport</option>
+							<option value="Książki">Książki</option>
+							<option value="Jedzenie">Jedzenie</option>
+							<option value="Mieszkanie">Mieszkanie</option>
+							<option value="Telekomunikacja">Telekomunikacja</option>
+							<option value="Opieka zdrowotna">Opieka zdrowotna</option>
+							<option value="Ubranie">Ubranie</option>
+							<option value="Higiena">Higiena</option>
+							<option value="Dzieci">Dzieci</option>
+							<option value="Rozrywka">Rozrywka</option>
+							<option value="Wycieczka">Wycieczka</option>
+							<option value="Oszczędności">Oszczędności</option>
+							<option value="Na emeryture">Na emeryture</option>
+							<option value="Spłata długów">Spłata długów</option>
+							<option value="Darowizna">Darowizna</option>
+							<option value="Inne">Inne...</option>
+
+						</select>
                                         </div>
 										
-										<div class="form-group col-md-9 mx-auto">
-											<div class="icons">
-												<i class='icon-pencil'></i>
-											</div>
-                                            <input type="text" class="form-control" placeholder="Komentarz *" name="comment"
+					<div class="form-group col-md-9 mx-auto">
+						<div class="icons">
+							<i class='icon-pencil'></i>
+						</div>
+                                                <input type="text" class="form-control" placeholder="Komentarz *" name="comment"
 											value="" />
                                         </div>
 										
                                     </div>
 									
-									<?php
-										if(isset($_SESSION['ok2']))
-										{	
-											 echo "<div id='name2' class='add'>".$_SESSION['ok2']."</div>";
-										}
-									?>
-							
-									<div class="col-md-12 buttonsExpense">
-									
-										<input type="submit" class="btn-success btnRegister2"  value="Dodaj"/>
-										
-										<input type="reset" class="btn-danger btnRegister2"  value="Anuluj"/>
-									
-									</div>
+					<?php
+						if(isset($_SESSION['ok2']))
+						{	
+							 echo "<div id='name2' class='add'>".$_SESSION['ok2']."</div>";
+						}
+					?>
+
+					<div class="col-md-12 buttonsExpense">
+
+						<input type="submit" class="btn-success btnRegister2"  value="Dodaj"/>
+
+						<input type="reset" class="btn-danger btnRegister2"  value="Anuluj"/>
+
+					</div>
 
                                 </div>
 								
-							</form>	
+				</form>	
 							
                         </div>
 						
