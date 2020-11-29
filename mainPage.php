@@ -1,5 +1,4 @@
 <?php
-
 	session_start();
 	
 	if (isset($_SESSION['ok'])) unset($_SESSION['ok']);
@@ -30,13 +29,11 @@
 	<link rel="stylesheet" href="cssFontello/fontello.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
-	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/portfel.png"> <!--ikonka w zakładce-->
+	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/portfel.png">
 	
 	<!--[if lt IE 9]>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-	<![endif]-->
-
-	
+	<![endif]-->	
 
 </head>
 
@@ -101,11 +98,11 @@
                 <div class="row">
 
                     <div class="col-lg-3 register-left">
-						<div id="icon"><i class="icon-money-1"></i></div>
-						<div class="welcome col-md-12">Witaj</div>
-						<?php
-							echo "<div id='name2' class='welcome col-md-12 mb-1'>".$_SESSION['username']."</div>"
-						?>	
+			<div id="icon"><i class="icon-money-1"></i></div>
+			<div class="welcome col-md-12">Witaj</div>
+			<?php
+				echo "<div id='name2' class='welcome col-md-12 mb-1'>".$_SESSION['username']."</div>"
+			?>	
                         <div class="col-md-12 mb-4">W menu głównym możesz wybrać opcje dodania przychodu i wydatku oraz przeglądać swój bilans finansowy z różnego okresu.</div>
                     </div>
 					
@@ -117,9 +114,9 @@
 								
                                 <div class="row description-form">
 								
-                                 <p class="description">Pierwszy krok do planowania swojego domowego budżetu wykonany. Co chcesz teraz zrobić?</p>
-								 
-								 <img src="img/mysliciel.png" alt="money" class="img-fluid" />
+					<p class="description">Pierwszy krok do planowania swojego domowego budżetu wykonany. Co chcesz teraz zrobić?</p>
+
+					<img src="img/mysliciel.png" alt="money" class="img-fluid" />
 									
                                 </div>
 							
