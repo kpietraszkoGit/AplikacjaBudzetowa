@@ -134,7 +134,7 @@
 		
 		<section>
 		
-			<div class="container register">
+		<div class="container register">
 			
                 <div class="row">
 				
@@ -246,7 +246,7 @@
 					
                 </div>
 
-            </div>
+            	</div>
 				
 		</section>
 		
