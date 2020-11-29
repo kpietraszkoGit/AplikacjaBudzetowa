@@ -1,5 +1,4 @@
 <?php
-
 	session_start();
 	
 	if (isset($_SESSION['ok'])) unset($_SESSION['ok']);
@@ -43,23 +42,21 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<![endif]-->
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+	<script type="text/javascript">
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
+	function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
           ['id', 'amount'],
           
-          <?php 
-
-			while($row = mysqli_fetch_array($res))
-			{
-				echo "['".$row['expense_category_assigned_to_user_id']."',".$row[ 'SUM(amount)']."],";
-			}
-
-          ?>
+	<?php 
+		while($row = mysqli_fetch_array($res))
+		{
+			echo "['".$row['expense_category_assigned_to_user_id']."',".$row[ 'SUM(amount)']."],";
+		}
+	?>
 
         ]);
 
@@ -69,11 +66,9 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
         chart.draw(data, options);
-      }
-    </script>
-	
+        }
+        </script>	
 
 </head>
 
@@ -133,48 +128,46 @@
 		
 		<section>
 		
-			<div class="container register">
+		<div class="container register">
 			
-                <div class="row">
+			<div class="row">
 
-                    <div class="col-lg-3 register-left">
-						<div id="icon"><i class="icon-money-1"></i></div>
-						<div class="welcome col-md-12">Witaj</div>
-						<?php
-							echo "<div id='name2' class='welcome col-md-12 mb-1'>".$_SESSION['username']."</div>";
-						?>	
-                        <p>W menu głównym możesz wybrać opcje dodania przychodu i wydatku oraz przeglądać swój bilans finansowy z różnego okresu.</p>
-                    </div>
-					
-                    <div class="col-lg-9 register-right">                      
-						
-                        <div class="tab-content" id="myTabContent">
-						
-                         
-                                <h3 class="register-heading">Logowanie powiodło się!</h3>
-								
-                                <div class="row description-form">
-								
-                                 <p class="description">Pierwszy krok do planowania swojego domowego budżetu wykonany. Co chcesz teraz zrobić?</p>
-								 
-								 <img src="img/mysliciel.png" alt="money" class="img-fluid" />
-									
-                                </div>
-							
-                        </div>
-						
-                    </div>
-					
-                </div>
+			    <div class="col-lg-3 register-left">
+				<div id="icon"><i class="icon-money-1"></i></div>
+				<div class="welcome col-md-12">Witaj</div>
+				<?php
+					echo "<div id='name2' class='welcome col-md-12 mb-1'>".$_SESSION['username']."</div>";
+				?>	
+				<p>W menu głównym możesz wybrać opcje dodania przychodu i wydatku oraz przeglądać swój bilans finansowy z różnego okresu.</p>
+			    </div>
 
-            </div>
+			    <div class="col-lg-9 register-right">                      
+
+				<div class="tab-content" id="myTabContent">
+
+					<h3 class="register-heading">Logowanie powiodło się!</h3>
+
+					<div class="row description-form">
+
+						<p class="description">Pierwszy krok do planowania swojego domowego budżetu wykonany. Co chcesz teraz zrobić?</p>
+
+						<img src="img/mysliciel.png" alt="money" class="img-fluid" />
+
+					</div>
+
+				</div>
+
+			    </div>
+
+			</div>
+
+            	</div>
 				
 		</section>
 		
 	</main>
 	
 	<footer>
-		
 		<div class="info">
 			Wszelkie prawa zastrzeżone &copy; 2019 Dziękuję za wizytę!
 		</div>
