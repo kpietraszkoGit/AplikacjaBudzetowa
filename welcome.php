@@ -1,5 +1,4 @@
 <?php
-
 	session_start();
 	
 	if (!isset($_SESSION['successfulRegistration']))
@@ -26,7 +25,6 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
@@ -52,7 +50,6 @@
 <body>
 
 	<header>
-		
 		<div class="logo2">
 		<img src="img/napis5.png" class="img-fluid" alt="logo"/>
 		</div>
@@ -62,7 +59,7 @@
 		
 		<section>
 		
-			<div class="container register mt-1">
+		<div class="container register mt-1">
 			
                 <div class="row">
 				
@@ -82,26 +79,26 @@
                             </li>
                         </ul>
 				
-						<div class="tab-content" id="myTabContent">
-					
-					 
-							<h3 class="register-heading">Rejestracja powiodła się!</h3>
-							
-							<div class="row description-form">
-							
-							 <p class="description">Dziękujemy za rejestrację w serwisie! Możesz już zalogować się na swoje konto!</p>
-							 
-							 <img src="img/kobieta2.png" alt="money" class="img-fluid" />
-								
-							</div>
-						
-						</div>
+			<div class="tab-content" id="myTabContent">
+
+
+				<h3 class="register-heading">Rejestracja powiodła się!</h3>
+
+				<div class="row description-form">
+
+				 <p class="description">Dziękujemy za rejestrację w serwisie! Możesz już zalogować się na swoje konto!</p>
+
+				 <img src="img/kobieta2.png" alt="money" class="img-fluid" />
+
+				</div>
+
+			</div>
 						
                     </div>
 					
                 </div>
 
-            </div>							
+           	 </div>							
 				
 		</section>
 		
