@@ -11,20 +11,19 @@ $res = $dbhandle->query($query);
   <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
+    function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
           ['Country', 'Visits'],
           
           <?php 
-			while($row=$res->fetch_assoc())
-			{
-				echo "['".$row['Country']."',".$row['sum(Visits)']."],";
-			}
-
+		while($row=$res->fetch_assoc())
+		{
+			echo "['".$row['Country']."',".$row['sum(Visits)']."],";
+		}
           ?>
 
         ]);
@@ -37,7 +36,7 @@ $res = $dbhandle->query($query);
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
         chart.draw(data, options);
-      }
+    }
     </script>
   </head>
   <body>
